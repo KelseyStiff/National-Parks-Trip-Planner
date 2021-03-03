@@ -24,3 +24,6 @@ class Park(BaseModel):
     def __str__(self):
         return(f'Name: {self.park_name} City: {self.park_city} State: {self.park_state} Description: {self.park_description}')
 
+
+def create_db():
+    db.create_tables([Park])
