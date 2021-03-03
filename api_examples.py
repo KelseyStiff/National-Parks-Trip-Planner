@@ -57,7 +57,26 @@ def get_translation_data():
             break
 
     
+def get_points_of_interest():
+    key = '5b3ce3597851110001cf6248b08a97b53d964b5e8aaf1a905b7cf551'
+
+    body = {"request":"pois","geometry":{"bbox":[[8.8034,53.0756],[8.7834,53.0456]],"geojson":{"type":"Point","coordinates":[8.8034,53.0756]},"buffer":200}}
+
+    headers = {
+        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+        'Authorization': '5b3ce3597851110001cf6248b08a97b53d964b5e8aaf1a905b7cf551',
+        'Content-Type': 'application/json; charset=utf-8'
+        }
+      
+    call = requests.post('https://api.openrouteservice.org/pois', json=body, headers=headers).json()
+
+
+    for i in range(10):
+        try:
+            pprint(call[0]['features'][i]['properties']['osm_tags']['name'])
+        except:
+            continue
+
+
     
-
-
-get_translation_data()
+get_points_of_interest()
