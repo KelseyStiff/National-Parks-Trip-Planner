@@ -62,8 +62,14 @@ def delete_all_parks():
     Park.delete().execute()
 
 
+def delete_parks_by_name(park_name):
+    park = get_park_by_name(park_name)
+    if park != None:
+        Park.delete_instance(park)
+
 
 
 #save_park('Yellowstone National Park', 'Middlanoware', 'Wyoming', 'Beautiful scenic park.', 1234567.89, 9876543.21, 'sldksjdlf', 'sdlkjsdfl', 'sldkjsldkfd')
 #save_park('Yosemite', 'Somewhere', 'Nevada', 'Cool national park.', 1234567.890, 09876543.21, 'sldksjdl', 'sdlkjsdf', 'sldkjsldkf')
 #save_park('Random Park', 'A City', 'Some State', 'This is the park description.', 555555.55, 66666.66, 'asdfsdfs', 'sdfdfsdsfdaf', 'sdfsdfadfasdf')
+
