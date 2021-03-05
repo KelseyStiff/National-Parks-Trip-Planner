@@ -7,8 +7,14 @@ def save_park(name, city, state, description, image1, image2, image3):
     park.save()
 
 
-def get_park(name):
+def get_park_by_name(name):
     return Park.get(park_name = name)
+
+
+def get_all_parks():
+    parks = Park.select()
+    return parks
+
 
     
 
