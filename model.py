@@ -22,7 +22,8 @@ class Park(BaseModel):
 
 
     def __str__(self):
-        return(f'Name: {self.park_name} City: {self.park_city} State: {self.park_state} Description: {self.park_description}')
+        #return(f'Name: {self.park_name}     City: {self.park_city}      State: {self.park_state}        Description: {self.park_description}')
+        return "Name: {0:30} City: {0:20} State: {0:20} Description: {0:40}".format(self.park_name,self.park_city,self.park_state,self.park_description)
 
 
 def create_db():
