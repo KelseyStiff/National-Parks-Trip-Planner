@@ -11,7 +11,7 @@ class BaseModel(Model):
 
 
 class Park(BaseModel):
-    park_name = CharField(null=False)
+    park_name = CharField(null=False, unique=True) # The user shouldn't be able to add the same park twice
     park_city = CharField(null=False)
     park_state = CharField(null=False)
     park_description = CharField(null=False)
