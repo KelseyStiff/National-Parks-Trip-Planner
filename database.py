@@ -5,7 +5,7 @@ import peewee
 
 """
 Accepts all values for a park object and saves it to the database. All parameters are required except images.
-Some parks may not pull up enough pictures.
+Some park names may not pull up enough pictures.
 """
 def save_park(name, city, state, description, latitude, longitude, image1=None, image2=None, image3=None):  
     park = Park(
