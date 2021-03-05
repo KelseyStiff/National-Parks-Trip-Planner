@@ -28,10 +28,16 @@ def get_park_city(park_name):
     return city
 
 
+def get_park_latitude_by_name(park_name):
+    park = get_park_by_name(park_name)
+    return park.latitude
+
+
+def get_park_longitude_by_name(park_name):
+    park = get_park_by_name(park_name)
+    return park.longitude
+    
 
 
 
-
-#model.create_db()
-#save_park('test park', 'Minneapolis', 'MN', 'a test park', 123.45, 6345.3, 'sldkfjsdl', 'sldkfslfj', 'sldkjsldkf')
 
