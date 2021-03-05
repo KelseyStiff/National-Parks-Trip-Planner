@@ -24,7 +24,7 @@ class Park(BaseModel): # The user shouldn't be able to add the same park twice
 
 
     def __str__(self):
-        return "Name: {0:30} City: {0:20} State: {0:20} Description: {0:40}".format(self.park_name,self.park_city,self.park_state,self.park_description)
+        return "Name: {0:30} City: {1:20} State: {2:20} Description: {3:40}".format(self.park_name,self.park_city,self.park_state,self.park_description)
 
 
 def create_db():
