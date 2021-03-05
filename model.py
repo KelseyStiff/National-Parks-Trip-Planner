@@ -17,9 +17,9 @@ class Park(BaseModel):
     park_description = CharField(null=False)
     latitude = DecimalField(null=False)
     longitude = DecimalField(null=False)
-    image_1 = CharField(null=False)
-    image_2 = CharField(null=False)
-    image_3 = CharField(null=False)
+    image_1 = CharField()
+    image_2 = CharField()
+    image_3 = CharField()
 
 
 

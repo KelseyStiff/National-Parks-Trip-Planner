@@ -3,7 +3,10 @@ import model
 import peewee
 
 
-"""Accepts all values for a park object and saves it to the database. All parameters are required except images."""
+"""
+Accepts all values for a park object and saves it to the database. All parameters are required except images.
+Some parks may not pull up enough pictures.
+"""
 def save_park(name, city, state, description, latitude, longitude, image1=None, image2=None, image3=None):  
     park = Park(
         park_name = name, park_city = city, park_state = state, 
@@ -33,7 +36,6 @@ def get_park_city(park_name):
 def get_park_latitude_by_name(park_name):
     park = get_park_by_name(park_name)
     return park.latitude
-
 
 
 def get_park_longitude_by_name(park_name):
