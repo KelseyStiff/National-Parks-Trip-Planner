@@ -1,4 +1,4 @@
-from peewee import Model, CharField, Database, Check, SqliteDatabase
+from peewee import Model, CharField, Database, Check, SqliteDatabase, DecimalField
 from config import db_path
 import os
 
@@ -15,6 +15,8 @@ class Park(BaseModel):
     park_city = CharField(null=False)
     park_state = CharField(null=False)
     park_description = CharField(null=False)
+    latitude = DecimalField(null=False)
+    longitude = DecimalField(null=False)
     image_1 = CharField(null=False)
     image_2 = CharField(null=False)
     image_3 = CharField(null=False)
