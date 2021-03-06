@@ -83,7 +83,13 @@ class TestParksDB(TestCase):
         self.assertEqual(actual_coordinates, expected_coordinates)
 
 
-    def test_        
+    def test_delete_all_parks(self):
+        self.add_sample_data()
+        database.delete_all_parks()
+        for p in Park.select().execute():
+            self.assertIsNone(p)
+
+         
 
 
 
