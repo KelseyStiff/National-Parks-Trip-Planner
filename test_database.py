@@ -89,8 +89,12 @@ class TestParksDB(TestCase):
         for p in Park.select().execute():
             self.assertIsNone(p)
 
-         
 
+    def test_delete_park_by_name(self):
+        self.add_sample_data()
+        database.delete_park_by_name('Yosemite')
+        park = Park.get_or_none(park_name = 'Yosemite')
+        self.assertIsNone(park)
 
 
 if __name__ == '__main__':

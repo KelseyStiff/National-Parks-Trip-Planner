@@ -62,7 +62,7 @@ def delete_all_parks():
     Park.delete().execute()
 
 
-def delete_parks_by_name(park_name):
+def delete_park_by_name(park_name):
     park = get_park_by_name(park_name)
     if park != None:
         Park.delete_instance(park)
