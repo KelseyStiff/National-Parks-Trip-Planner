@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>National Parks Finder</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+<style>
+#map {width: 500px; height: 500px; }
+</style>
+</head>
+
+<body>
+
+	<div id="map">
+	</div>
+
+<script>
+    // set center of map
+    let USAcoordinates = [-98.5795,39.8283]//lat then long
+
+    //retrieve key from app.py
+	mapboxgl.accessToken = "{{ key }}"
+	
+	map = new mapboxgl.Map({
+	container: 'map', // container id
+	style: 'mapbox://styles/mapbox/streets-v11', // style URL
+	center: USAcoordinates, // starting position [lng, lat]
+	zoom: 3.5 // starting zoom
+	});
+</script>
+</body>
+</html>
+
+	
+
