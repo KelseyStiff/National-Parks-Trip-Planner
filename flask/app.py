@@ -1,7 +1,9 @@
 import flask
 from flask import request, url_for, render_template, redirect
 import sys
+import os
 sys.path.insert(1, 'project_4/states_and_months')
+
 
 app = flask.Flask(__name__)
 
