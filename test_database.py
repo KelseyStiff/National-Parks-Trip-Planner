@@ -45,7 +45,46 @@ class TestParksDB(TestCase):
         self.assertEqual(actual, expected)
 
     
- 
+    def test_get_all_parks(self):
+        self.add_sample_data()
+        parks = database.get_all_parks()
+        expected_names = ['Yellowstone National Park', 'Yosemite', 'Random Park']
+        actual_names = []
+        for p in parks:
+            actual_names.append(p.park_name)
+        self.assertEqual(expected_names, actual_names)
+
+
+    def test_get_park_city(self):
+        self.add_sample_data()
+        actual_city = database.get_park_city('Yosemite')
+        expected_city = 'Somewhere'
+        self.assertEqual(actual_city, expected_city)
+
+
+    def test_get_park_latitude_by_name(self):
+        self.add_sample_data()
+        actual_latitude = database.get_park_latitude_by_name('Yosemite')
+        expected_latitude = 1234567.890
+        self.assertEqual(actual_latitude, expected_latitude)
+
+
+    def test_get_park_longitude_by_name(self):
+        self.add_sample_data()
+        actual_longitude = database.get_park_longitude_by_name('Yosemite')
+        expected_longitude = 09876543.21
+        self.assertEqual(actual_longitude, expected_longitude)
+
+
+    def test_get_all_parks_coordinates(self):
+        self.add_sample_data()
+        actual_coordinates = database.get_all_parks_coordinates()
+        expected_coordinates = {1234567.89 : 9876543.21, 1234567.890 : 09876543.21, 555555.55 : 66666.66}
+        self.assertEqual(actual_coordinates, expected_coordinates)
+
+
+    def test_        
+
 
 
 if __name__ == '__main__':

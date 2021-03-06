@@ -41,12 +41,12 @@ def get_park_city(park_name): # Returns None if the park's not found
 
 def get_park_latitude_by_name(park_name):
     park = get_park_by_name(park_name)
-    return park.latitude
+    return float(park.latitude)
 
 
 def get_park_longitude_by_name(park_name):
     park = get_park_by_name(park_name)
-    return park.longitude
+    return float(park.longitude)
     
 
 """Returns a dictionary containing the float coordinates of all saved parks"""
