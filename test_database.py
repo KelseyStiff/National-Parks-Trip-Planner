@@ -20,7 +20,7 @@ class TestParksDB(TestCase):
         self.db.create_tables([Park])
 
 
-    def add_test_data(self):
+    def add_sample_data(self):
         database.save_park('Yellowstone National Park', 'Middlanoware', 'WY', 'Beautiful scenic park.', 1234567.89, 9876543.21, 'image url 1', 'image url 2', 'image url 3')
         database.save_park('Yosemite', 'Somewhere', 'NA', 'Cool national park.', 1234567.890, 09876543.21, 'image url 1', 'image url 2', 'image url 3')
         database.save_park('Random Park', 'A City', 'SS', 'This is the park description.', 555555.55, 66666.66, 'image url 1', 'image url 2', 'image url 3')
@@ -31,6 +31,20 @@ class TestParksDB(TestCase):
         park = database.get_park_by_name('Park Name')
         self.assertIsNotNone(park)
         
+        park = database.get_park_by_name('NAME THAT DOES NOT EXIST') 
+        self.assertIsNone(park)
+
+
+    def test_get_park_by_name(self):
+        self.add_sample_data()
+        park = database.get_park_by_name('Yosemite')
+        expected = ['Yosemite', 'Somewhere', 'NA', 'Cool national park.', 1234567.890, 
+                     09876543.21, 'image url 1', 'image url 2', 'image url 3']
+        actual = [park.park_name, park.park_city, park.park_state, park.park_description, float(park.latitude), 
+                  float(park.longitude), park.image_1, park.image_2, park.image_3]
+        self.assertEqual(actual, expected)
+
+
 
 if __name__ == '__main__':
     unittest.main()        
