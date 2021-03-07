@@ -1,9 +1,12 @@
 import requests
 import os
+from pprint import pprint
 
-url = 'https://history.openweathermap.org/data/2.5/aggregated/year?lat=35&lon=139&appid=a7d9ecfa2043441c1eafcf7528d24379'
+key = 'd5iUahogk60F0E2GYZ2OK37j9LpL0hSm'
+url = 'https://api.meteostat.net/v2/point/climate?lat=44&lon=-93&alt=58'
 
-response = requests.get(url).json()
+headers={'x-api-key': key}
 
-print(response)
+resp = requests.get(url,headers=headers)
 
+pprint(resp.json())
