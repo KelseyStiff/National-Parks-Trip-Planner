@@ -10,7 +10,7 @@ Some park names may not pull up enough pictures.
 """
 def save_trip(name, city, state, description, latitude, longitude, image1=None, image2=None, image3=None):  
     try:
-        trip = Trip(
+        Trip.create(
             park_name = name, 
             park_city = city, 
             park_state = state, 
@@ -21,7 +21,6 @@ def save_trip(name, city, state, description, latitude, longitude, image1=None, 
             image_2 = image2, 
             image_3 = image3
             )
-        trip.save()
     except IntegrityError:
         return "There was an issue while trying to save this trip."
 
