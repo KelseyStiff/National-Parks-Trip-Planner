@@ -1,14 +1,30 @@
 import requests
 import os
-
-# TODO add exception handling for connection error, and key error (some searches may not return an image)
-
-national_park = input('What park do you want images for? ')
+from pprint import pprint
 
 key = os.environ.get('UNSPLASH_KEY')
+url = 'https://api.unsplash.com/search/photos'
+number_of_images = 3
 
-random_park_image = requests.get(f'https://api.unsplash.com/photos/random?query="{national_park}";client_id={key}').json()
-    
-image_url = random_park_image['links']['download']
+def get_park_image(park):
+    response = _unsplash_api_call(park)
+    images = _extract_data(response)
+    return images
 
-print(image_url)
+
+def _unsplash_api_call(park):
+    query = {'query':park, 'per_page':number_of_images, 'client_id':key}
+    response = requests.get(url, params=query).json()
+    return response
+
+
+def _extract_data(response):
+    image_urls = []
+    images = response['results']
+    for image in images:
+        image_urls.append(image['urls']['small'])
+    return image_urls
+
+
+# Test module usage
+pprint(get_park_image('Yosemite'))
