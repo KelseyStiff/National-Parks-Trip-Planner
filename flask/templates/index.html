@@ -13,6 +13,21 @@
 
 <body>
 
+    <label for="states">What State would you like to search?</label>
+	<select name="states" id="states">
+        {% for state in states %}
+        <option value="key">{{state}}</option>
+        {% endfor %}
+    </select>
+    
+    <label for="months">When are you going?</label>
+	<select name="months" id="months">
+        {% for month in months %}
+        <option value="key">{{ month }}</option>
+        {% endfor %}
+    </select>
+    <button type="button">SEARCH</button>
+
 	<div id="map">
 	</div>
 
@@ -32,6 +47,3 @@
 </script>
 </body>
 </html>
-
-	
-
