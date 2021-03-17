@@ -30,14 +30,18 @@ def save_trip(name, city, state, description, latitude, longitude, image1=None, 
         return "There was an issue while trying to save this trip."
 
 
-def get_trip_by_park_name(park_name): # Returns none if park not in database
-    return Trip.get_or_none(park_name = park_name)
-
-
 """Returns all saved trip objects"""
 def get_all_trips():
     trips = Trip.select()
     return trips
+
+
+def delete_all_trips():
+    Trip.delete().execute()
+
+
+def get_trip_by_park_name(park_name): # Returns none if park not in database
+    return Trip.get_or_none(park_name = park_name)
 
 
 def get_park_city(park_name): # Returns None if the park's not found
@@ -65,10 +69,6 @@ def get_all_trips_coordinates():
     for park in trips:
         coordinates.update({float(park.latitude) : float(park.longitude)}) 
     return coordinates
-
-
-def delete_all_trips():
-    Trip.delete().execute()
 
 
 def delete_trip_by_park_name(park_name):
