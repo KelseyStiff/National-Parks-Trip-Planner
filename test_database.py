@@ -19,11 +19,17 @@ class TestParksDB(TestCase):
         self.db.drop_tables([Trip])
         self.db.create_tables([Trip])
 
-# TODO don't call save_park - instead add data manually
+
     def add_sample_data(self):
-        database.save_trip('Yellowstone National Park', 'Middlanoware', 'Wyoming', 'Beautiful scenic park.', 1234567.89, 9876543.21, 'image url 1', 'image url 2', 'image url 3')
-        database.save_trip('Yosemite', 'Somewhere', 'Nevada', 'Cool national park.', 1234567.890, 09876543.21, 'image url 1', 'image url 2', 'image url 3')
-        database.save_trip('Random Park', 'A City', 'Somewherolina', 'This is the park description.', 555555.55, 66666.66, 'image url 1', 'image url 2', 'image url 3')
+        Trip.create(park_name= 'Yellowstone National Park', park_city= 'Middlanoware', park_state=' Wyoming', park_description= 'Beautiful scenic park.',
+                    latitude= 1234567.89, longitude= 9876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3')
+        
+        Trip.create(park_name= 'Yosemite', park_city= 'Somewhere', park_state= 'Nevada', park_description= 'Cool national park.',
+                    latitude= 1234567.890, longitude= 09876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3')
+        
+        Trip.create(park_name= 'Random Park', park_city= 'A City', park_state= 'Somewherolina', park_description= 'This is the park description.',
+                    latitude= 555555.55, longitude= 66666.66, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3')
+        
 
 
     def test_save_trip(self):
