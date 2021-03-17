@@ -77,7 +77,7 @@ def delete_trip_by_park_name(park_name):
         Trip.delete_instance(trip)
 
 
-# model.create_db()
-# save_trip('Yellowstone National Park', 'Middlanoware', 'Wyoming', 'Beautiful scenic park.', 1234567.89, 9876543.21, 'sldksjdlf', 'sdlkjsdfl', 'sldkjsldkfd')
-# save_trip('Yosemite', 'Somewhere', 'Nevada', 'Cool national park.', 1234567.890, 09876543.21, 'sldksjdl', 'sdlkjsdf', 'sldkjsldkf')
-# save_trip('Random Park', 'A City', 'Somewherolina', 'This is the park description.', 555555.55, 66666.66, 'asdfsdfs', 'sdfdfsdsfdaf', 'sdfsdfadfasdf')
+model.create_db()
+save_trip('Yellowstone National Park', 'Middlanoware', 'Wyoming', 'Beautiful scenic park.', 1234567.89, 9876543.21, 'sldksjdlf', 'sdlkjsdfl', 'sldkjsldkfd')
+save_trip('Yosemite', 'Somewhere', 'Nevada', 'Cool national park.', 1234567.890, 09876543.21, 'sldksjdl', 'sdlkjsdf', 'sldkjsldkf')
+save_trip('Random Park', 'A City', 'Somewherolina', 'This is the park description.', 555555.55, 66666.66, 'asdfsdfs', 'sdfdfsdsfdaf', 'sdfsdfadfasdf')

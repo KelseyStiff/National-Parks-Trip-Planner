@@ -4,7 +4,7 @@ from unittest.mock import patch
 from peewee import Model, CharField, ForeignKeyField, DecimalField, BooleanField, Database, Check, IntegrityError, SqliteDatabase
 
 import config
-db_path = 'test_parks.db'
+db_path = 'test_trips.db'
 config.db_path = db_path
 
 from model import Trip

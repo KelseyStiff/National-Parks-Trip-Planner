@@ -1,1 +1,1 @@
-db_path = 'parks.db'
+db_path = 'trips.db'
