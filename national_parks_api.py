@@ -2,6 +2,7 @@ import requests
 from pprint import pprint
 import os
 from states_and_months import states
+from trip import Trip
 
 key = os.environ.get('PARKS_KEY')
 
@@ -21,34 +22,32 @@ f'https://developer.nps.gov/api/v1/parks?start=451&api_key={key}',
 def get_park_data(state):
     state_code = _get_state_code(state.upper())
     list_of_parks = _call_park_api()
-    parks = _create_park_dictionary(list_of_parks, state_code)
-    pprint(parks)
+    parks = _create_trip_object_list(list_of_parks, state_code)
+    return parks
 
 
-def _create_park_dictionary(list_of_parks, state_code):   
+def _create_trip_object_list(list_of_parks, state_code):   
     parks_in_state = []
-
     try:
         # Since the api has a limit of 50 parks, we have to have multiple urls to run after each other. This line loops through all the 400 data in the api   
         for park in list_of_parks:
             state = park['states']
 
             if state == state_code:
-                name = park['fullName']
-                description = park['description']
-                latitude = park['latitude']
-                longitude = park['longitude']                
                 address = park['addresses'][1]
-                    
-                # Important components of address 
-                street = address['line1']
-                city = address['city']
-                state = address['stateCode']
-                zipCode = address['postalCode']
 
-                parks_in_state.append({'Name' : name, 'Description' : description, 'Latitude' : latitude, 
-                                       'Longitude' : longitude, 'Street Address' : street, 'City' : city, 
-                                       'State' : state, 'Zip' : zipCode})
+                park_name = park['fullName']
+                park_city = address['city']
+                park_state = park['states']
+                park_description = park['description']
+                latitude = park['latitude']
+                longitude = park['longitude']     
+
+                trip = Trip(park_name=park_name, park_city=park_city, park_state=park_state, 
+                            park_description=park_description, latitude=latitude, longitude=longitude)
+                        
+                parks_in_state.append(trip)
+                
         return parks_in_state
     except KeyError:
         return "There are no parks for that state."
@@ -74,4 +73,6 @@ def _call_park_api():
         return "Error getting data. Try checking your internet connection."
 
 
-get_park_data('UTah')
+parks = get_park_data('UTah')
+for park in parks:
+        print(park)
