@@ -10,10 +10,10 @@ class BaseModel(Model):
         database = db
 
 
-class Park(BaseModel): # The user shouldn't be able to add the same park twice 
-    park_name = CharField(null=False, unique=True, constraints=[Check('length(park_name) > 0'), Check('length(park_name) <= 30')]) 
+class Trip(BaseModel): # The user shouldn't be able to add the same Trip twice 
+    park_name = CharField(null=False, constraints=[Check('length(park_name) > 0'), Check('length(park_name) <= 30')]) 
     park_city = CharField(null=False, constraints=[Check('length(park_city) > 0'), Check('length(park_city) <= 30')])
-    park_state = CharField(null=False, constraints=[Check('length(park_state) > 0'), Check('length(park_state) <= 2')]) # State code
+    park_state = CharField(null=False, constraints=[Check('length(park_state) > 0'), Check('length(park_state) <= 30')]) 
     park_description = CharField(null=False, constraints=[Check('length(park_description) > 0'), Check('length(park_description) <= 200')])
     latitude = DecimalField(null=False, constraints=[Check('length(latitude) > 0'), Check('length(latitude) <= 30')])
     longitude = DecimalField(null=False, constraints=[Check('length(longitude) > 0'), Check('length(longitude) <= 30')])
@@ -28,4 +28,4 @@ class Park(BaseModel): # The user shouldn't be able to add the same park twice
 
 
 def create_db():
-    db.create_tables([Park])
+    db.create_tables([Trip])
