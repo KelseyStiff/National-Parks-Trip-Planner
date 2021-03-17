@@ -20,7 +20,10 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trip twice
     image_1 = CharField(constraints=[Check('length(image_1) <= 100')])
     image_2 = CharField(constraints=[Check('length(image_2) <= 100')])
     image_3 = CharField(constraints=[Check('length(image_3) <= 100')])
-
+    precipitation = DecimalField()
+    avg_temp = DecimalField()
+    max_temp = DecimalField()
+    min_temp = DecimalField()
 
 
     def __str__(self):

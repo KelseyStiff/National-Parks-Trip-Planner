@@ -8,7 +8,8 @@ from peewee import IntegrityError
 Accepts all values for a park object and saves it to the database. All parameters are required except images.
 Some park names may not pull up enough pictures.
 """
-def save_trip(name, city, state, description, latitude, longitude, image1=None, image2=None, image3=None):  
+def save_trip(name, city, state, description, latitude, longitude, image1=None, image2=None, 
+              image3=None, precipitation=None, avg_temp=None, max_temp=None, min_temp=None):  
     try:
         Trip.create(
             park_name = name, 
@@ -19,7 +20,11 @@ def save_trip(name, city, state, description, latitude, longitude, image1=None, 
             longitude = longitude, 
             image_1 = image1, 
             image_2 = image2, 
-            image_3 = image3
+            image_3 = image3,
+            precipitation = precipitation,
+            avg_temp = avg_temp,
+            max_temp = max_temp,
+            min_temp = min_temp
             )
     except IntegrityError:
         return "There was an issue while trying to save this trip."
@@ -29,7 +34,7 @@ def get_trip_by_park_name(park_name): # Returns none if park not in database
     return Trip.get_or_none(park_name = park_name)
 
 
-"""Returns all saved trips objects"""
+"""Returns all saved trip objects"""
 def get_all_trips():
     trips = Trip.select()
     return trips

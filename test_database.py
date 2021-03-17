@@ -22,18 +22,20 @@ class TestParksDB(TestCase):
 
     def add_sample_data(self):
         Trip.create(park_name= 'Yellowstone National Park', park_city= 'Middlanoware', park_state=' Wyoming', park_description= 'Beautiful scenic park.',
-                    latitude= 1234567.89, longitude= 9876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3')
+                    latitude= 1234567.89, longitude= 9876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3', precipitation= 10.8, 
+                    avg_temp= 20.1, max_temp= 35.4, min_temp= 4.1)
         
         Trip.create(park_name= 'Yosemite', park_city= 'Somewhere', park_state= 'Nevada', park_description= 'Cool national park.',
-                    latitude= 1234567.890, longitude= 09876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3')
+                    latitude= 1234567.890, longitude= 09876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3', precipitation= 11.8, 
+                    avg_temp= 21.1, max_temp= 38.4, min_temp= 3.1)
         
         Trip.create(park_name= 'Random Park', park_city= 'A City', park_state= 'Somewherolina', park_description= 'This is the park description.',
-                    latitude= 555555.55, longitude= 66666.66, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3')
-        
+                    latitude= 555555.55, longitude= 66666.66, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3', precipitation= 12.8, 
+                    avg_temp= 30.1, max_temp= 45.4, min_temp= 5.1)
 
 
     def test_save_trip(self):
-        database.save_trip('Park Name', 'Park City', 'Parksylvania', 'Park Description', 65656556.0, 55555.000, 'image', 'image', 'image')
+        database.save_trip('Park Name', 'Park City', 'Parksylvania', 'Park Description', 65656556.0, 55555.000, 'image', 'image', 'image', 3.1, 4.1, 5.1, 6.1)
         trip = Trip.get_or_none(park_name = 'Park Name')
         self.assertIsNotNone(trip)  
         trip = Trip.get_or_none(park_name = 'NAME THAT DOES NOT EXIST') 
@@ -44,9 +46,10 @@ class TestParksDB(TestCase):
         self.add_sample_data()
         trip = database.get_trip_by_park_name('Yosemite')
         expected = ['Yosemite', 'Somewhere', 'Nevada', 'Cool national park.', 1234567.890, 
-                     09876543.21, 'image url 1', 'image url 2', 'image url 3']
+                     09876543.21, 'image url 1', 'image url 2', 'image url 3', 11.8, 21.1, 38.4, 3.1]
         actual = [trip.park_name, trip.park_city, trip.park_state, trip.park_description, float(trip.latitude), 
-                  float(trip.longitude), trip.image_1, trip.image_2, trip.image_3]
+                  float(trip.longitude), trip.image_1, trip.image_2, trip.image_3, float(trip.precipitation), float(trip.avg_temp), 
+                  float(trip.max_temp), float(trip.min_temp)]
         self.assertEqual(actual, expected)
 
     
