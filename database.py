@@ -8,23 +8,23 @@ from peewee import IntegrityError
 Accepts all values for a park object and saves it to the database. All parameters are required except images.
 Some park names may not pull up enough pictures.
 """
-def save_trip(name, city, state, description, latitude, longitude, image1=None, image2=None, 
-              image3=None, precipitation=None, avg_temp=None, max_temp=None, min_temp=None):  
+def save_trip(trip):  
     try:
         Trip.create(
-            park_name = name, 
-            park_city = city, 
-            park_state = state, 
-            park_description = description, 
-            latitude = latitude, 
-            longitude = longitude, 
-            image_1 = image1, 
-            image_2 = image2, 
-            image_3 = image3,
-            precipitation = precipitation,
-            avg_temp = avg_temp,
-            max_temp = max_temp,
-            min_temp = min_temp
+            month = trip.month,
+            park_name = trip.park_name, 
+            park_city = trip.park_city, 
+            park_state = trip.park_state, 
+            park_description = trip.park_description, 
+            latitude = trip.latitude, 
+            longitude = trip.longitude, 
+            image_1 = trip.image_1, 
+            image_2 = trip.image_2, 
+            image_3 = trip.image_3,
+            precipitation = trip.precipitation,
+            avg_temp = trip.avg_temp,
+            max_temp = trip.max_temp,
+            min_temp = trip.min_temp
             )
     except IntegrityError:
         return "There was an issue while trying to save this trip."
@@ -32,8 +32,7 @@ def save_trip(name, city, state, description, latitude, longitude, image1=None, 
 
 """Returns all saved trip objects"""
 def get_all_trips():
-    trips = Trip.select()
-    return trips
+    return Trip.select()
 
 
 def delete_all_trips():
@@ -77,7 +76,9 @@ def delete_trip_by_park_name(park_name):
         Trip.delete_instance(trip)
 
 
+#Test functionality
 model.create_db()
-save_trip('Yellowstone National Park', 'Middlanoware', 'Wyoming', 'Beautiful scenic park.', 1234567.89, 9876543.21, 'sldksjdlf', 'sdlkjsdfl', 'sldkjsldkfd')
-save_trip('Yosemite', 'Somewhere', 'Nevada', 'Cool national park.', 1234567.890, 09876543.21, 'sldksjdl', 'sdlkjsdf', 'sldkjsldkf')
-save_trip('Random Park', 'A City', 'Somewherolina', 'This is the park description.', 555555.55, 66666.66, 'asdfsdfs', 'sdfdfsdsfdaf', 'sdfsdfadfasdf')
+trip = Trip(month='November', park_name='Random Park Name', park_city='Randomville', park_state='Randesota', 
+            park_description='A random cool park.', latitude=25.761681, longitude=-80.191788, image_1='someurl.com', 
+            image_2='someotherurl.com', image_3='anotherurl.com', precipitation=58, avg_temp=62.5, max_temp=89.3, min_temp=33.9)
+save_trip(trip)
