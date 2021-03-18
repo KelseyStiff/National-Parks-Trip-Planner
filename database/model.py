@@ -1,5 +1,5 @@
 from peewee import Model, CharField, Database, Check, SqliteDatabase, DecimalField
-from config import db_path
+from .config import db_path
 import os
 
 db = SqliteDatabase(db_path)

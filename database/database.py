@@ -1,5 +1,5 @@
-from model import Trip
-import model
+from . import model 
+from .model import Trip
 import peewee
 from peewee import IntegrityError
 
