@@ -21,22 +21,25 @@ class TestParksDB(TestCase):
 
 
     def add_sample_data(self):
-        Trip.create(park_name= 'Yellowstone National Park', park_city= 'Middlanoware', park_state=' Wyoming', park_description= 'Beautiful scenic park.',
+        Trip.create(month= 'November', park_name= 'Yellowstone National Park', park_city= 'Middlanoware', park_state=' Wyoming', park_description= 'Beautiful scenic park.',
                     latitude= 1234567.89, longitude= 9876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3', precipitation= 10.8, 
                     avg_temp= 20.1, max_temp= 35.4, min_temp= 4.1)
         
-        Trip.create(park_name= 'Yosemite', park_city= 'Somewhere', park_state= 'Nevada', park_description= 'Cool national park.',
+        Trip.create(month= 'October', park_name= 'Yosemite', park_city= 'Somewhere', park_state= 'Nevada', park_description= 'Cool national park.',
                     latitude= 1234567.890, longitude= 09876543.21, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3', precipitation= 11.8, 
                     avg_temp= 21.1, max_temp= 38.4, min_temp= 3.1)
         
-        Trip.create(park_name= 'Random Park', park_city= 'A City', park_state= 'Somewherolina', park_description= 'This is the park description.',
+        Trip.create(month= 'January', park_name= 'Random Park', park_city= 'A City', park_state= 'Somewherolina', park_description= 'This is the park description.',
                     latitude= 555555.55, longitude= 66666.66, image_1= 'image url 1', image_2= 'image url 2', image_3= 'image url 3', precipitation= 12.8, 
                     avg_temp= 30.1, max_temp= 45.4, min_temp= 5.1)
 
 
     def test_save_trip(self):
-        database.save_trip('Park Name', 'Park City', 'Parksylvania', 'Park Description', 65656556.0, 55555.000, 'image', 'image', 'image', 3.1, 4.1, 5.1, 6.1)
-        trip = Trip.get_or_none(park_name = 'Park Name')
+        test_trip = Trip(month='November', park_name='Random Park Name', park_city='Randomville', park_state='Randesota', 
+            park_description='A random cool park.', latitude=25.761681, longitude=-80.191788, image_1='someurl.com', 
+            image_2='someotherurl.com', image_3='anotherurl.com', precipitation=58, avg_temp=62.5, max_temp=89.3, min_temp=33.9)
+        database.save_trip(test_trip)
+        trip = Trip.get_or_none(park_name = 'Random Park Name')
         self.assertIsNotNone(trip)  
         trip = Trip.get_or_none(park_name = 'NAME THAT DOES NOT EXIST') 
         self.assertIsNone(trip)
