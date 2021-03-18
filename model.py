@@ -11,6 +11,7 @@ class BaseModel(Model):
 
 
 class Trip(BaseModel): # The user shouldn't be able to add the same Trip twice 
+    month = CharField(null = False)
     park_name = CharField(null=False, constraints=[Check('length(park_name) > 0'), Check('length(park_name) <= 30')]) 
     park_city = CharField(null=False, constraints=[Check('length(park_city) > 0'), Check('length(park_city) <= 30')])
     park_state = CharField(null=False, constraints=[Check('length(park_state) > 0'), Check('length(park_state) <= 30')]) 
