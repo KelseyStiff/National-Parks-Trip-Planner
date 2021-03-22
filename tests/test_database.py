@@ -2,11 +2,12 @@ import unittest
 from unittest import TestCase
 from unittest.mock import patch
 from peewee import Model, CharField, ForeignKeyField, DecimalField, BooleanField, Database, Check, IntegrityError, SqliteDatabase
-from database import config, database, model
+from database import config
 
-db_path = 'test_trips.db'
+db_path = 'tests/test_trips.db'
 config.db_path = db_path
 
+from database import database
 from database.model import Trip
 
 class TestParksDB(TestCase):
