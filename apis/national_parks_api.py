@@ -73,6 +73,6 @@ def _call_park_api():
         return "Error getting data. Try checking your internet connection."
 
 
-parks = get_park_data('UTah', 'November')
-for park in parks:
-        print(park)
+# parks = get_park_data('UTah', 'November')
+# for park in parks:
+#         print(park)
