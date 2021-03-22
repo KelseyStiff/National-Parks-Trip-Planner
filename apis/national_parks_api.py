@@ -1,8 +1,8 @@
 import requests
 from pprint import pprint
 import os
-from states_and_months import states
-from trip import Trip
+from apis.states_and_months import states
+from apis.trip import Trip
 
 key = os.environ.get('PARKS_KEY')
 
@@ -73,6 +73,6 @@ def _call_park_api():
         return "Error getting data. Try checking your internet connection."
 
 
-parks = get_park_data('UTah', 'November')
-for park in parks:
-        print(park)
+# parks = get_park_data('UTah', 'November')
+# for park in parks:
+#         print(park)

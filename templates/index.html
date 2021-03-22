@@ -13,21 +13,22 @@
 
 <body>
 
-    <label for="states">What State would you like to search?</label>
-	<select name="states" id="states">
-        {% for state in states %}
-        <option value="key">{{state}}</option>
-        {% endfor %}
-    </select>
-    
-    <label for="months">When are you going?</label>
-	<select name="months" id="months">
-        {% for month in months %}
-        <option value="key">{{ month }}</option>
-        {% endfor %}
-    </select>
-    <button type="button">SEARCH</button>
-
+    <form class="form" action="/" method="GET">
+		<label for="states">What State would you like to search?</label>
+		<select name="states" id="states" class="form-control">
+			{% for s in state %}
+			<option value="{{ s }}">{{ s }}</option>
+			{% endfor %}
+		</select>
+		
+		<label for="months">When are you going?</label>
+		<select name="months" id="months" class="form-control">
+			{% for m in month %}
+			<option value="{{ m }}">{{ m }}</option>
+			{% endfor %}
+		</select>
+		<button type="submit" id="search-button">SEARCH</button>
+	</form>
 	<div id="map">
 	</div>
 
