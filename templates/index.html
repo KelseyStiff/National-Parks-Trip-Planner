@@ -34,7 +34,13 @@
 
 <script>
     // set center of map
-    let USAcoordinates = [-98.5795,39.8283]//lat then long
+	let USAcoordinates = [-98.5795,39.8283]//lat then long
+	let park_list = '{{ parks }}'
+	console.log(parks_list)
+
+	let searchButton = document.getElementById('search-button')
+
+
 
     //retrieve key from app.py
 	mapboxgl.accessToken = "{{ key }}"
@@ -46,19 +52,23 @@
 	zoom: 3.5 // starting zoom
 	});
 
-	bridges = [
-    {"name": "Verrazano-Narrows Bridge", "city": "New York", "state": "NY", "span": 1298.4, "location": [-74.0447,40.6066]},
-    {"name":"Mackinac Bridge","city":"Mackinaw and St Ignance","state":"MI","span":1158.0, "location":[-84.7278,45.8174]},
-    {"name":"George Washington Bridge","city":"New York","state":"NY","span":1067.0, "location":[-73.9527,40.8517]}
-	]
-
-	bridges.forEach(function (bridge){
-		let popupText = `${bridge.name} <br> ${bridge.city}, ${bridge.state} <br> ${bridge.span} Meters long`
-		let marker = new mapboxgl.Marker()
-			.setLngLat(bridge.location)
-			.setPopup(new mapboxgl.Popup().setHTML(popupText))
-			.addTo(map)
+	
+	searchButton.addEventListener('click', function(){
 	})
+
+	// bridges = [
+    // {"name": "Verrazano-Narrows Bridge", "city": "New York", "state": "NY", "span": 1298.4, "location": [-74.0447,40.6066]},
+    // {"name":"Mackinac Bridge","city":"Mackinaw and St Ignance","state":"MI","span":1158.0, "location":[-84.7278,45.8174]},
+    // {"name":"George Washington Bridge","city":"New York","state":"NY","span":1067.0, "location":[-73.9527,40.8517]}
+	// ]
+
+	// bridges.forEach(function (bridge){
+	// 	let popupText = `${bridge.name} <br> ${bridge.city}, ${bridge.state} <br> ${bridge.span} Meters long`
+	// 	let marker = new mapboxgl.Marker()
+	// 		.setLngLat(bridge.location)
+	// 		.setPopup(new mapboxgl.Popup().setHTML(popupText))
+	// 		.addTo(map)
+	// })
 
 
 </script>
