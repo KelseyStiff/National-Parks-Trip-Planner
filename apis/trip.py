@@ -16,6 +16,17 @@ class Trip:
         self.avg_temp = avg_temp
         self.max_temp = max_temp
         self.min_temp = min_temp
+
+
+    def dump(self):
+        return {"park": {"month": self.month,
+                          "name": self.park_name,
+                          "city": self.park_city,
+                          "state": self.park_state,
+                          "descriptiond" : self.park_description,
+                          "latitude" : self.latitude,
+                          "longitude" : self.longitude
+                          }}
         
 
 

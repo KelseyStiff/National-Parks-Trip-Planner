@@ -27,12 +27,14 @@
 			<option value="{{ m }}">{{ m }}</option>
 			{% endfor %}
 		</select>
-		<button type="submit" id="search-button">SEARCH</button>
+		<button type="submit" id="search-button">SEARCH</button> 
 	</form>
 	<div id="map">
 	</div>
 
+
 <script>
+
     // set center of map
     let USAcoordinates = [-98.5795,39.8283]//lat then long
 
@@ -45,21 +47,65 @@
 	center: USAcoordinates, // starting position [lng, lat]
 	zoom: 3.5 // starting zoom
 	});
-
-	// bridges = [
-    // {"name": "Verrazano-Narrows Bridge", "city": "New York", "state": "NY", "span": 1298.4, "location": [-74.0447,40.6066]},
-    // {"name":"Mackinac Bridge","city":"Mackinaw and St Ignance","state":"MI","span":1158.0, "location":[-84.7278,45.8174]},
-    // {"name":"George Washington Bridge","city":"New York","state":"NY","span":1067.0, "location":[-73.9527,40.8517]}
+	
+	// parks = [
+    // {"name": "Verrazano-Narrows park", "city": "New York", "state": "NY", "span": 1298.4, "location": [-74.0447,40.6066]},
+    // {"name":"Mackinac park","city":"Mackinaw and St Ignance","state":"MI","span":1158.0, "location":[-84.7278,45.8174]},
+    // {"name":"George Washington park","city":"New York","state":"NY","span":1067.0, "location":[-73.9527,40.8517]}
 	// ]
-	// parks = "{{ parks }}"
 
-	// parks.forEach(function (park){
-	// 	let popupText = `${park.park_name} <br> ${park.park_city}, ${park.park_state} <br> ${park.description}`
+
+	let parks = "{{ parks }}";
+	//console.log(parks)
+	
+
+
+	new_parks = parks.replaceAll("&#39;", "\'");
+	new_parks = new_parks.replaceAll("&#34;", "\"");
+	
+	//console.log(parks_object)
+	
+	console.log(new_parks)
+
+
+
+	obj = JSON.parse(new_parks);
+	console.log(obj)
+
+
+	//console.log(parks_object['data'][0])
+
+
+
+
+
+
+	//console.log(parks)
+	//console.log(typeof(parks))
+	//obj = JSON.parse(parks)
+	
+	// list_parks = []
+	// for(var p in parks)
+	// 	i = JSON.parse(p)
+    // 	list_parks.push([i, parks [i]]);
+		
+	
+	// list_parks.forEach(function (park){
+	// 	let popupText = `${park.name} <br> ${park.city}, ${park.state} <br> ${park.span}`
 	// 	let marker = new mapboxgl.Marker()
-	// 		.setLngLat([park.latitude, park.longitude])
+	// 		.setLngLat(park.location)
 	// 		.setPopup(new mapboxgl.Popup().setHTML(popupText))
 	// 		.addTo(map)
-	//  })
+	// })
+
+		
+	
+	let popupText = `${parks} <br>`
+	let marker = new mapboxgl.Marker()
+		.setLngLat([-73.9527,40.8517])
+		.setPopup(new mapboxgl.Popup().setHTML(popupText))
+		.addTo(map)
+	
 
 
 </script>
