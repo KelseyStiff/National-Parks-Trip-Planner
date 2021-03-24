@@ -4,4 +4,4 @@ __pycache__
 .idea
 .DS_Store
 trips.db
-test_database.db
+test_trips.db
