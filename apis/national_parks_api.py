@@ -4,7 +4,7 @@ import os
 from apis.states_and_months import states
 from apis.trip import Trip
 
-key = os.environ.get('PARKS_KEY')
+key = os.environ.get('NATIONAL_PARKS_KEY')
 
 urls = [f'https://developer.nps.gov/api/v1/parks?&api_key={key}',
 f'https://developer.nps.gov/api/v1/parks?start=51&api_key={key}',
@@ -34,19 +34,31 @@ def _create_trip_object_list(list_of_parks, state_code, month):
             state = park['states']
 
             if state == state_code:
-                address = park['addresses'][1]
-
                 park_name = park['fullName']
-                park_city = address['city']
+                
                 park_state = park['states']
                 park_description = park['description']
                 latitude = park['latitude']
-                longitude = park['longitude']     
+                longitude = park['longitude']                
+                
+                park_name = park['fullName']
+                park_description = park['description']
+                latitude = park['latitude']
+                longitude = park['longitude']
+                try:
+                    address = park['addresses'][1]
+                    park_city = address['city']
+                except:
+                    address = 'Unknows Address'
+                    park_city = 'Unknown City'
+  
 
                 trip = Trip(month=month, park_name=park_name, park_city=park_city, park_state=park_state, 
-                            park_description=park_description, latitude=latitude, longitude=longitude)
-                        
-                parks_in_state.append(trip)
+                         park_description=park_description, latitude=latitude, longitude=longitude)
+                
+                parks_in_state.append(trip)         
+
+
                 
         return parks_in_state
     except KeyError:
