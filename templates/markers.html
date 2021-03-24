@@ -1,54 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>National Parks Finder</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
-<style>
-#map {width: 750px; height: 750px; }
-</style>
-</head>
-
-<body>
-
-    <form class="form" action="/" method="GET">
-		<label for="states">What State would you like to search?</label>
-		<select name="states" id="states" class="form-control">
-			{% for s in state %}
-			<option value="{{ s }}">{{ s }}</option>
-			{% endfor %}
-		</select>
-		
-		<label for="months">When are you going?</label>
-		<select name="months" id="months" class="form-control">
-			{% for m in month %}
-			<option value="{{ m }}">{{ m }}</option>
-			{% endfor %}
-		</select>
-		<button type="submit" id="search-button">SEARCH</button> 
-	</form>
-	<div id="map">
-	</div>
-
-
+{% extends 'index.html' %}
+{% block content%}
+<h1>testing template...</h1>
+{% endblock content %}
+{% block scripts %}
 <script>
-
-    // set center of map
-    let center_coordinates = "{{ coordinates }}"
-	center_coordinates = JSON.parse(center_coordinates)
-
+	// set center of map
+	let USAcoordinates = [-98.5795,39.8283]
     //retrieve key from app.py
 	mapboxgl.accessToken = "{{ key }}"
 	
 	map = new mapboxgl.Map({
 	container: 'map', // container id
 	style: 'mapbox://styles/mapbox/streets-v11', // style URL
-	center: center_coordinates, // starting position [lng, lat]
-	zoom: 5 // starting zoom
+	center: USAcoordinates, // starting position [lng, lat]
+	zoom: 3.5 // starting zoom
 	});
-	
+
 	let parks = "{{ parks }}";
 	parks = parks.replaceAll("&#39;", "\'");
 	parks = parks.replaceAll("&#34;", "\"");
@@ -62,7 +29,5 @@
 			.setPopup(new mapboxgl.Popup().setHTML(popupText))
 			.addTo(map)
 	})
-
 </script>
-</body>
-</html>
+{% endblock scripts %}

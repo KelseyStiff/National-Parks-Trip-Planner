@@ -28,5 +28,11 @@ def index():
 
 
 
+# @app.route('/trip-info/<int:tripid>')
+# def trip_info(parkid):
+#   #to-do trip 
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
