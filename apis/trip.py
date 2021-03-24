@@ -23,7 +23,7 @@ class Trip:
                           "name": self.park_name,
                           "city": self.park_city,
                           "state": self.park_state,
-                          "descriptiond" : self.park_description,
+                          "description" : self.park_description,
                           "latitude" : self.latitude,
                           "longitude" : self.longitude
                           }}
