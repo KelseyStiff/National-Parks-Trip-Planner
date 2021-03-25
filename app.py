@@ -15,6 +15,8 @@ def index():
   key = os.environ.get('MAPBOX_KEY')
 
 
+
+
   state = states
   month = months
   parks = []
@@ -35,15 +37,13 @@ def index():
       return render_template('index.html', key=key, month=month, state=state, coordinates=[-98.5795,39.8283]) # US coordinates
 
 
-@app.route('/park-info/<int:park_id>', methods=['GET','POST'])
-def park_info(park_id):
+@app.route('/park_info/<park_id>/<month>/', methods=['GET','POST'])
+def park_info(park_id,month):
   # TO-DO fetch park info from db, make api calls for climate & unsplash data
   # return json response - return jsonify(data)
-  parks = park_id
+  parks = {"park": park_id} # TODO get actual data
 
   return jsonify(parks)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

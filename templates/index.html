@@ -24,7 +24,7 @@
 		<label for="months">When are you going?</label>
 		<select name="months" id="months" class="form-control">
 			{% for m in month %}
-			<option value="{{ m }}">{{ m }}</option>
+			<option value="{{ m }}" id='month'>{{ m }}</option>
 			{% endfor %}
 		</select>
 		<button type="submit" id="search-button">SEARCH</button>
