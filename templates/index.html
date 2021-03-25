@@ -31,7 +31,7 @@
 	</form>
 	<div id="map">
 	</div>
-
+	{% block scripts %}
 <script>
     // set center of map
     let USAcoordinates = [-98.5795,39.8283]
@@ -44,6 +44,8 @@
 	center: USAcoordinates, // starting position [lng, lat]
 	zoom: 3.5 // starting zoom
 	});
+
 </script>
+{% endblock scripts %}
 </body>
 </html>
