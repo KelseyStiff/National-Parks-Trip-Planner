@@ -31,14 +31,15 @@
 			map.flyTo({
 			center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
 			});
+
+			marker.getElement().addEventListener('click', () => {
+			//call fetch_data to get Park data, pictures, weather
+          alert("Clicked"); //test if working
 			
 	})
 
-		marker.getElement().addEventListener('click', () => {
-			//call fetch_data to get Park data, pictures, weather
-          alert("Clicked"); //test if working
+		
         })
-	})
 
 	function fetch_data(){
 		url = '' //api/db url here

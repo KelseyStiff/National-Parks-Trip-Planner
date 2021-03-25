@@ -50,7 +50,7 @@ def _create_trip_object_list(list_of_parks, state_code):
                 park = Park(park_id = park_id, park_name = park_name, park_city = park_city, park_state = park_state, 
                             park_description = park_description, latitude = latitude, longitude = longitude)
                 
-                parks_in_state.append(trip)         
+                parks_in_state.append(park)         
       
         return parks_in_state
     except KeyError:
