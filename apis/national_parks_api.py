@@ -1,8 +1,8 @@
 import requests
 from pprint import pprint
 import os
-from apis.states_and_months import states
-from apis.trip import Trip
+from .states_and_months import states
+from database.model import Park
 
 key = os.environ.get('PARKS_KEY')
 
@@ -19,14 +19,14 @@ f'https://developer.nps.gov/api/v1/parks?start=451&api_key={key}',
 ]
 
 """All interaction with this module should be done through this function"""
-def get_park_data(state, month):
+def get_park_data(state):
     state_code = _get_state_code(state.upper())
     list_of_parks = _call_park_api()
-    parks = _create_trip_object_list(list_of_parks, state_code, month)
+    parks = _create_trip_object_list(list_of_parks, state_code)
     return parks
 
 
-def _create_trip_object_list(list_of_parks, state_code, month):   
+def _create_trip_object_list(list_of_parks, state_code):   
     parks_in_state = []
     try:
         # Since the api has a limit of 50 parks, we have to have multiple urls to run after each other. This line loops through all the 400 data in the api   
@@ -36,6 +36,7 @@ def _create_trip_object_list(list_of_parks, state_code, month):
             if state == state_code:
                 address = park['addresses'][1]
 
+                park_id = park['parkCode']
                 park_name = park['fullName']
                 park_city = address['city']
                 park_state = park['states']
@@ -43,10 +44,10 @@ def _create_trip_object_list(list_of_parks, state_code, month):
                 latitude = park['latitude']
                 longitude = park['longitude']     
 
-                trip = Trip(month=month, park_name=park_name, park_city=park_city, park_state=park_state, 
-                            park_description=park_description, latitude=latitude, longitude=longitude)
-                        
-                parks_in_state.append(trip)
+                park = Park(park_id = park_id, park_name = park_name, park_city = park_city, park_state = park_state, 
+                            park_description = park_description, latitude = latitude, longitude = longitude)
+        
+                parks_in_state.append(park)
                 
         return parks_in_state
     except KeyError:
