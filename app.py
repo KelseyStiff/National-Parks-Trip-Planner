@@ -27,6 +27,14 @@ def index():
       return render_template('index.html', key=key, month=month, state=state, coordinates=[-98.5795,39.8283]) # US coordinates
 
 
+@app.route('/park-info/<str:park_code>/<str:month>')
+def park_info():
+  # TO-DO fetch park info from db, make api calls for climate & unsplash data
+  # return json response - return jsonify(data)
+
+  return render_template('markers.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

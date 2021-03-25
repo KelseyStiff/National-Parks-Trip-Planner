@@ -63,6 +63,25 @@
 			.addTo(map)
 	})
 
+	function fetch_data(){
+		url = '' //api/db url here
+		fetch(url)
+			.then( (response) => {
+				console.log(response) // logging response from the server
+				// extract JSON
+				return response.json()
+			})
+			.then( function(data) {
+
+				//access data here
+
+			}) //if issues connecting to API error displays
+			.catch( error => {
+				console.log(error)
+				alert('ERROR, VIEW CONSOLE FOR MORE DETAILS')
+			})
+	}
+
 </script>
 </body>
 </html>
