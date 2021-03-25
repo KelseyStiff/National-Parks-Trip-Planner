@@ -1,5 +1,5 @@
 import flask
-from flask import request, url_for, render_template, redirect
+from flask import request, url_for, render_template, redirect, jsonify
 import os
 from states_months import states, months, state_coordinates
 from apis import national_parks_api, states_and_months
@@ -13,6 +13,7 @@ app = flask.Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
+
 
   state = states
   month = months
@@ -34,20 +35,13 @@ def index():
       return render_template('index.html', key=key, month=month, state=state, coordinates=[-98.5795,39.8283]) # US coordinates
 
 
-# @app.route('/park-info/<str:park_code>/<str:month>')
-# def park_info():
-#   # TO-DO fetch park info from db, make api calls for climate & unsplash data
-#   # return json response - return jsonify(data)
+@app.route('/park-info/<int:park_id>', methods=['GET','POST'])
+def park_info(park_id):
+  # TO-DO fetch park info from db, make api calls for climate & unsplash data
+  # return json response - return jsonify(data)
+  parks = park_id
 
-  
-
-#   return render_template('markers.html')
-
-
-
-# @app.route('/trip-info/<int:tripid>')
-# def trip_info(parkid):
-#   #to-do trip 
+  return jsonify(parks)
 
 
 

@@ -34,15 +34,17 @@
 
 			marker.getElement().addEventListener('click', () => {
 			//call fetch_data to get Park data, pictures, weather
-          alert("Clicked"); //test if working
-			
-	})
+				park_id = park.park.id
+				alert(park_id); //test if working
+				fetch_data(park_id)
+
+			})
 
 		
         })
 
-	function fetch_data(){
-		url = '' //api/db url here
+	function fetch_data(park_id){
+		url = `http://127.0.0.1:5000/park_info/${park_id}` //api/db url here
 		fetch(url)
 			.then( (response) => {
 				console.log(response) // logging response from the server
@@ -50,6 +52,7 @@
 				return response.json()
 			})
 			.then( function(data) {
+				console.log(data)
 
 				//access data here
 
