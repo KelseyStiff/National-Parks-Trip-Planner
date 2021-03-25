@@ -10,9 +10,7 @@
 #map {width: 500px; height: 500px; }
 </style>
 </head>
-
 <body>
-
     <form class="form" action="/" method="GET">
 		<label for="states">What State would you like to search?</label>
 		<select name="states" id="states" class="form-control">
@@ -31,7 +29,8 @@
 	</form>
 	<div id="map">
 	</div>
-	{% block scripts %}
+	{% block content %}
+	{% endblock content %}
 <script>
     // set center of map
     let USAcoordinates = [-98.5795,39.8283]
@@ -44,8 +43,8 @@
 	center: USAcoordinates, // starting position [lng, lat]
 	zoom: 3.5 // starting zoom
 	});
-
 </script>
-{% endblock scripts %}
 </body>
 </html>
+{% block scripts %}
+{% endblock scripts %}

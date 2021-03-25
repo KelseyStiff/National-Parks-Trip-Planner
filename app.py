@@ -13,6 +13,7 @@ app = flask.Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
+
   state = states
   month = months
   parks = []
@@ -46,6 +47,7 @@ def park_info(park_id,month):
   print(json_trip)
 
   return json_trip
+
 
 if __name__ == '__main__':
     app.run(debug=True)
