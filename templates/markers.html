@@ -28,6 +28,10 @@
 			.setLngLat([parseFloat(park.park.longitude),parseFloat(park.park.latitude)])
 			.setPopup(new mapboxgl.Popup().setHTML(popupText))
 			.addTo(map)
+			map.flyTo({
+			center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
+			});
+			
 	})
 </script>
 {% endblock scripts %}

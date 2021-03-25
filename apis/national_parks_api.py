@@ -4,7 +4,9 @@ import os
 from apis.states_and_months import states
 from apis.trip import Trip
 
-key = os.environ.get('NATIONAL_PARKS_KEY')
+# key = os.environ.get('NATIONAL_PARKS_KEY')
+key = '4lJM36HZ5LpjaQ7bei6cC4JlX6C5xBqohu96XFXH'
+
 
 
 urls = [f'https://developer.nps.gov/api/v1/parks?&api_key={key}',
