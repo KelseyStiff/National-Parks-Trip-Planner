@@ -4,7 +4,7 @@ import os
 from .states_and_months import states
 from database.model import Park
 
-key = os.environ.get('PARKS_KEY')
+key = os.environ.get('NATIONAL_PARKS_KEY')
 
 urls = [f'https://developer.nps.gov/api/v1/parks?&api_key={key}',
 f'https://developer.nps.gov/api/v1/parks?start=51&api_key={key}',
@@ -34,21 +34,24 @@ def _create_trip_object_list(list_of_parks, state_code):
             state = park['states']
 
             if state == state_code:
-                address = park['addresses'][1]
-
                 park_id = park['parkCode']
-                park_name = park['fullName']
-                park_city = address['city']
+                park_name = park['fullName']     
                 park_state = park['states']
                 park_description = park['description']
                 latitude = park['latitude']
-                longitude = park['longitude']     
-
+                longitude = park['longitude']                
+                try:
+                    address = park['addresses'][1]
+                    park_city = address['city']
+                except:
+                    address = 'Unknown Address'
+                    park_city = 'Unknown City'
+  
                 park = Park(park_id = park_id, park_name = park_name, park_city = park_city, park_state = park_state, 
                             park_description = park_description, latitude = latitude, longitude = longitude)
-        
-                parks_in_state.append(park)
                 
+                parks_in_state.append(trip)         
+      
         return parks_in_state
     except KeyError:
         return "There are no parks for that state."
