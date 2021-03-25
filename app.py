@@ -2,7 +2,7 @@ import flask
 from flask import request, url_for, render_template, redirect, jsonify
 import os
 from states_months import states, months, state_coordinates
-from apis import national_parks_api, states_and_months
+from apis import national_parks_api, states_and_months, climate_api, unsplash_api
 import json
 from database import model
 from database import database
@@ -13,10 +13,6 @@ app = flask.Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
-
-
-
-
   state = states
   month = months
   parks = []
@@ -41,9 +37,15 @@ def index():
 def park_info(park_id,month):
   # TO-DO fetch park info from db, make api calls for climate & unsplash data
   # return json response - return jsonify(data)
-  parks = {"park": park_id} # TODO get actual data
+  park = database.get_park_by_code(park_id) # TODO get actual data
+  trip_w_climate = climate_api.get_weather_data(park, month)
+  trip_w_climate_and_pictures = unsplash_api.get_park_image(trip_w_climate)
 
-  return jsonify(parks)
+
+  json_trip = json.dumps(trip_w_climate_and_pictures.dump())
+  print(json_trip)
+
+  return json_trip
 
 if __name__ == '__main__':
     app.run(debug=True)

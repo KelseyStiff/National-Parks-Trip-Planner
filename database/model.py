@@ -35,7 +35,7 @@ class Park(BaseModel):
                           }}
 
 
-class SavedTrip(BaseModel): # The user shouldn't be able to add the same SavedTrips twice 
+class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice 
     month = CharField(null = False)
     park = ForeignKeyField(Park, backref='parks')
     image_1 = CharField(constraints=[Check('length(image_1) <= 100')])
@@ -75,5 +75,5 @@ class SavedTrip(BaseModel): # The user shouldn't be able to add the same SavedTr
 
 def create_db():
     db.connect()
-    db.create_tables([Park, SavedTrip])
+    db.create_tables([Park, Trip])
     

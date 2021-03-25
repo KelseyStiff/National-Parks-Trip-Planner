@@ -1,5 +1,5 @@
 from . import model 
-from .model import SavedTrip
+from .model import Trip
 import peewee
 from peewee import IntegrityError
 from .model import Park
@@ -26,12 +26,18 @@ def save_trip(trip):
     pass
 
 
+def get_park_by_code(code):
+    park = Park.get(Park.park_id == code)
+    return park
+
+
+
 """Returns all saved trip objects"""
 def get_all_trips():
-    return SavedTrip.select()
+    return Trip.select()
 
 
 def delete_all_trips():
-    SavedTrip.delete().execute()
+    Trip.delete().execute()
 
 
