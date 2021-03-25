@@ -2,14 +2,18 @@ import flask
 from flask import request, url_for, render_template, redirect
 import os
 from states_months import states, months, state_coordinates
-from apis import national_parks_api
+from apis import national_parks_api, states_and_months
 import json
+from database import model
+from database import database
 
+model.create_db()
 app = flask.Flask(__name__)
 
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
+
   state = states
   month = months
   parks = []
@@ -19,12 +23,25 @@ def index():
     month_input = request.args.get("months")
 
     if state_input and month_input:
-      parks = national_parks_api.get_park_data(state_input,month_input)
+      parks = database.get_parks_by_state(states_and_months.states[state_input.upper()]) # try to get the parks from the database
+      if parks == None: # if there aren't any parks for the state in the database, call the api to fetch it
+        parks = national_parks_api.get_park_data(state_input)
+        database.save_parks_list(parks) # Calling a function to save all parks in the list
       json_parks = json.dumps([p.dump() for p in parks]) # translate Trip object data into json
       coordinates = state_coordinates[state_input]  # coordinates for the state entered by the user
       return render_template('markers.html', key=key, month=month, state=state, parks=json.dumps(json_parks), coordinates=coordinates)
     else:
       return render_template('index.html', key=key, month=month, state=state, coordinates=[-98.5795,39.8283]) # US coordinates
+
+
+# @app.route('/park-info/<str:park_code>/<str:month>')
+# def park_info():
+#   # TO-DO fetch park info from db, make api calls for climate & unsplash data
+#   # return json response - return jsonify(data)
+
+  
+
+#   return render_template('markers.html')
 
 
 
