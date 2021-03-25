@@ -6,6 +6,7 @@ from apis.trip import Trip
 
 key = os.environ.get('NATIONAL_PARKS_KEY')
 
+
 urls = [f'https://developer.nps.gov/api/v1/parks?&api_key={key}',
 f'https://developer.nps.gov/api/v1/parks?start=51&api_key={key}',
 f'https://developer.nps.gov/api/v1/parks?start=101&api_key={key}', 

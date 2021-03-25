@@ -61,6 +61,11 @@
 			.setLngLat([parseFloat(park.park.longitude),parseFloat(park.park.latitude)])
 			.setPopup(new mapboxgl.Popup().setHTML(popupText))
 			.addTo(map)
+
+		marker.getElement().addEventListener('click', () => {
+			//call fetch_data to get Park data, pictures, weather
+          alert("Clicked"); //test if working
+        })
 	})
 
 	function fetch_data(){
