@@ -1,6 +1,5 @@
 {% extends 'index.html' %}
 {% block content%}
-<h1>testing template...</h1>
 {% endblock content %}
 {% block scripts %}
 <script>
@@ -21,6 +20,7 @@
 	parks = parks.replaceAll("&#34;", "\"");
 	parks = parks.substr(1).slice(0, -1);
 	parks = JSON.parse(parks);
+	let month = document.getElementById('month').innerHTML
 
 	parks.forEach(function (park){
 		let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
@@ -35,8 +35,7 @@
 			marker.getElement().addEventListener('click', () => {
 			//call fetch_data to get Park data, pictures, weather
 				park_id = park.park.id
-				alert(park_id); //test if working
-				fetch_data(park_id)
+				fetch_data(park_id,month)
 
 			})
 
@@ -44,7 +43,7 @@
         })
 
 	function fetch_data(park_id){
-		url = `http://127.0.0.1:5000/park_info/${park_id}` //api/db url here
+		url = `http://127.0.0.1:5000/park_info/${park_id}/${month}` //api/db url here
 		fetch(url)
 			.then( (response) => {
 				console.log(response) // logging response from the server
