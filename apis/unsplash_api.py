@@ -4,6 +4,7 @@ from pprint import pprint
 from database.model import Trip
 
 key = os.environ.get('UNSPLASH_KEY')
+
 url = 'https://api.unsplash.com/search/photos'
 number_of_images = 3
 

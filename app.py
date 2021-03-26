@@ -16,6 +16,7 @@ def index():
 
 
 
+
   state = states
   month = months
   parks = []
@@ -31,9 +32,9 @@ def index():
         database.save_parks_list(parks) # Calling a function to save all parks in the list
       json_parks = json.dumps([p.dump() for p in parks]) # translate Trip object data into json
       coordinates = state_coordinates[state_input]  # coordinates for the state entered by the user
-      return render_template('markers.html', key=key, month=month, state=state, parks=json.dumps(json_parks), coordinates=coordinates)
+      return render_template('markers.html', key=key, month=month, state=state, parks=json.dumps(json_parks), coordinates=coordinates, month_input=month_input)
     else:
-      return render_template('index.html', key=key, month=month, state=state, coordinates=[-98.5795,39.8283]) # US coordinates
+      return render_template('index.html', key=key, month=month, state=state, coordinates=[-98.5795,39.8283], month_input=month_input) # US coordinates
 
 
 @app.route('/park_info/<park_id>/<month>/', methods=['GET','POST'])
