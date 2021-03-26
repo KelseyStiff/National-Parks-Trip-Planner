@@ -3,6 +3,7 @@
 	<div id='trip-info'>
 		<h1 id='park-name'></h1>
 		<h1 id='park-city-state'></h1>
+		<h1 id='avg-temp'></h1>
 		<h1 id='min-temp'></h1>
 		<h1 id='max-temp'></h1>
 		<h1 id='avg-rain'></h1>
@@ -54,11 +55,14 @@
 						let city_state = document.getElementById("park-city-state")
 						city_state.innerHTML = JSON.stringify(data['park']['city'] + ', ' + data['park']['state']).replaceAll("\"","")
 
+						let avg_temp = document.getElementById("avg-temp")
+						avg_temp.innerHTML = `average temp: ${data['park']['avg_temp']} &#8457;`
+
 						let max_temp = document.getElementById("max-temp")
-						max_temp.innerHTML = `average max temp: ${data['park']['max_temp']} &#8457;`
+						max_temp.innerHTML = `max temp: ${data['park']['max_temp']} &#8457;`
 
 						let min_temp = document.getElementById("min-temp")
-						min_temp.innerHTML = `average min temp: ${data['park']['min_temp']} &#8457;`
+						min_temp.innerHTML = `min temp: ${data['park']['min_temp']} &#8457;`
 
 						let avg_rain = document.getElementById("avg-rain")
 						avg_rain.innerHTML = `average rainfall: ${ data['park']['precipiation']} inches`

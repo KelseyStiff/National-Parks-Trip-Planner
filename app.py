@@ -46,7 +46,6 @@ def park_info(park_id,month):
 
 
   json_trip = json.dumps(trip_w_climate_and_pictures.dump())
-  print(json_trip)
 
   return json_trip
 
