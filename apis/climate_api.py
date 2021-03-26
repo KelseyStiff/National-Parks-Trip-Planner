@@ -45,12 +45,19 @@ def _add_climate_data_to_trip(response, park, month):
 
 
 def _convert_celsius_to_fahrenheit(temp):
-    return round((temp * 1.8) + 32, 2)
+    try:
+        temperature = round((float(temp) * 1.8) + 32, 2)
+    except:
+        temperature = 0
+    return temperature
 
 
 def _convert_mm_to_inches(rainfall):
-    return round(rainfall / 25.4, 1)
-
+    try:
+        precipitation = round(float(rainfall) / 25.4, 1)
+    except:
+        precipitation = 0
+    return precipitation
 
 
 

@@ -57,16 +57,16 @@
 						city_state.innerHTML = JSON.stringify(data['park']['city'] + ', ' + data['park']['state']).replaceAll("\"","")
 
 						let avg_temp = document.getElementById("avg-temp")
-						avg_temp.innerHTML = `average temp: ${data['park']['avg_temp']} &#8457;`
+						avg_temp.innerHTML = `Average Temp: ${data['park']['avg_temp']} &#8457;`
 
 						let max_temp = document.getElementById("max-temp")
-						max_temp.innerHTML = `max temp: ${data['park']['max_temp']} &#8457;`
+						max_temp.innerHTML = `Max Temp: ${data['park']['max_temp']} &#8457;`
 
 						let min_temp = document.getElementById("min-temp")
-						min_temp.innerHTML = `min temp: ${data['park']['min_temp']} &#8457;`
+						min_temp.innerHTML = `Min Temp: ${data['park']['min_temp']} &#8457;`
 
 						let avg_rain = document.getElementById("avg-rain")
-						avg_rain.innerHTML = `average rainfall: ${ data['park']['precipiation']} inches`
+						avg_rain.innerHTML = `Average Rainfall: ${ data['park']['precipiation']} inches`
 
 						let image1URL = document.getElementById("img1")
 						image1URL.style.visibility="visible"
@@ -83,11 +83,6 @@
 						let image4URL = document.getElementById("img4")
 						image4URL.style.visibility="visible"
 						image4URL.src = data['park']['image_4'].replaceAll("\"","")
-
-						// TODO image 4 is coming back NULL
-						// let image4URL = document.getElementById("img4")
-						// image4URL.style.visibility="visible"
-						// image4URL.src = data['park']['image_4'].replaceAll("\"","")
 
 					}) //if issues connecting to API error displays
 					.catch( error => {
