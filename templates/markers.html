@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% block content%}
+
 	<div id='trip-info'>
 		<h1 id='park-name'></h1>
 		<h1 id='park-city-state'></h1>
@@ -23,7 +24,7 @@
 	parks = parks.replaceAll("&#34;", "\"");
 	parks = parks.substr(1).slice(0, -1);
 	parks = JSON.parse(parks);
-	let month = document.getElementById('month').innerHTML
+	let month = "{{ month_input }}"
 	
 	parks.forEach(function (park){
 		let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
