@@ -1,4 +1,4 @@
-from peewee import Model, CharField, Database, Check, SqliteDatabase, DecimalField, ForeignKeyField
+from peewee import Model, CharField, Database, Check, SqliteDatabase, DecimalField, ForeignKeyField, AutoField
 from .config import db_path
 import os
 
@@ -38,10 +38,10 @@ class Park(BaseModel):
 class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice 
     month = CharField(null = False)
     park = ForeignKeyField(Park, backref='parks')
-    image_1 = CharField(constraints=[Check('length(image_1) <= 100')])
-    image_2 = CharField(constraints=[Check('length(image_2) <= 100')])
-    image_3 = CharField(constraints=[Check('length(image_3) <= 100')])
-    image_4 = CharField(constraints=[Check('length(image_4) <= 100')])
+    image_1 = CharField()
+    image_2 = CharField()
+    image_3 = CharField()
+    image_4 = CharField()
     precipitation = DecimalField()
     avg_temp = DecimalField()
     max_temp = DecimalField()
@@ -53,7 +53,9 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
 
 
     def dump(self):
-        return {"park": {"month": self.month,
+        return {"park": {
+                          "trip_id" : self.id,
+                          "month": self.month,
                           "park_id" : self.park.park_id,
                           "park_name": self.park.park_name,
                           "city": self.park.park_city,
@@ -72,8 +74,11 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
                           }}
 
 
+class SavedTrip(Trip):
+    pass
+
 
 def create_db():
     db.connect()
-    db.create_tables([Park, Trip])
+    db.create_tables([Park, Trip, SavedTrip])
     

@@ -5,11 +5,6 @@ from peewee import IntegrityError
 from .model import Park
 
 
-"""
-Accepts all values for a park object and saves it to the database. All parameters are required except images.
-Some park names may not pull up enough pictures.
-"""
-
 def save_parks_list(parks):
     try:
         for p in parks:
@@ -23,13 +18,16 @@ def get_parks_by_state(state):
     
 
 def save_trip(trip):  
-    pass
+    try:
+        trip.save()
+        return "Success!"
+    except IntegrityError:
+        return "Trip couldn't be saved"
 
 
 def get_park_by_code(code):
     park = Park.get(Park.park_id == code)
     return park
-
 
 
 """Returns all saved trip objects"""
