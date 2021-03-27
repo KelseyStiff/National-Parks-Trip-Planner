@@ -1,3 +1,74 @@
+""""Both dictionaries will be used to translate user input into correct fornat for weather API"""
+
+states_to_codes = {
+    'ALABAMA': 'AL',
+    'ALASKA': 'AK',
+    'ARIZONA': 'AZ',
+    'ARKANSAS': 'AR',
+    'CALIFORNIA': 'CA',
+    'COLORADO': 'CO',
+    'CONNECTICUT': 'CT',
+    'DELAWARE': 'DE',
+    'DISTRICT OF COLUMBIA': 'DC',
+    'FLORIDA': 'FL',
+    'GEORGIA': 'GA',
+    'HAWAII': 'HI',
+    'IDAHO': 'ID',
+    'ILLINOIS': 'IL',
+    'INDIANA': 'IN',
+    'IOWA': 'IA',
+    'KANSAS': 'KS',
+    'KENTUCKY': 'KY',
+    'LOUISIANA': 'LA',
+    'MAINE': 'ME',
+    'MARYLAND': 'MD',
+    'MASSACHUSETTS': 'MA',
+    'MICHIGAN': 'MI',
+    'MINNESOTA': 'MN',
+    'MISSISSIPPI': 'MS',
+    'MISSOURI': 'MO',
+    'MONTANA': 'MT',
+    'NEBRASKA': 'NE',
+    'NEVADA': 'NV',
+    'NEW HAMPSHIRE': 'NH',
+    'NEW JERSEY': 'NJ',
+    'NEW MEXICO': 'NM',
+    'NEW YORK': 'NY',
+    'NORTH CAROLINA': 'NC',
+    'NORTH DAKOTA': 'ND',
+    'OHIO': 'OH',
+    'OKLAHOMA': 'OK',
+    'OREGON': 'OR',
+    'PENNSYLVANIA': 'PA',
+    'RHODE ISLAND': 'RI',
+    'SOUTH CAROLINA': 'SC',
+    'SOUTH DAKOTA': 'SD',
+    'TENNESSEE': 'TN',
+    'TEXAS': 'TX',
+    'UTAH': 'UT',
+    'VERMONT': 'VT',
+    'VIRGINIA': 'VA',
+    'WASHINGTON': 'WA',
+    'WEST VIRGINIA': 'WV',
+    'WISCONSIN': 'WI',
+    'WYOMING': 'WY'
+}
+
+months_int = {
+    'JANUARY': 1,
+    'FEBRUARY': 2,
+    'MARCH': 3,
+    'APRIL': 4,
+    'MAY': 5,
+    'JUNE': 6,
+    'JULY': 7,
+    'AUGUST': 8,
+    'SEPTEMBER': 9,
+    'OCTOBER': 10,
+    'NOVEMBER': 11,
+    'DECEMBER': 12
+}
+
 states = ['Alabama',
 'Alaska',
 'Arizona',
@@ -27,8 +98,8 @@ states = ['Alabama',
 'Montana',
 'Nebraska',
 'Nevada',
-'New Hampshire'
-,'New Jersey',
+'New Hampshire',
+'New Jersey',
 'New Mexico',
 'New York',
 'North Carolina',
@@ -117,3 +188,21 @@ state_coordinates = {
  'West Virginia': [-80.5, 39.0],
  'Wisconsin': [-89.5, 44.5],
  'Wyoming': [-107.290283, 43.07597]}
+
+
+months_string = {
+   1 : "JANUARY",
+   2 : "FEBRUARY",
+   3 : "MARCH",
+   4 : "APRIL",
+   5 : "MAY",
+   6 : "JUNE",
+   7 : "JULY",
+   8 : "AUGUST",
+   9 : "SEPTEMBER",
+   10 : "OCTOBER",
+   11 : "November",
+   12 : "December"
+}
+
+
