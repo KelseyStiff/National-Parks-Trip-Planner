@@ -50,13 +50,8 @@ def park_info(park_id,month):
 @app.route('/saved_trip_info/<trip_id>/', methods=['GET','POST'])
 def saved_trip_info(trip_id):
   trip = model.Trip.get(model.Trip.id == trip_id)
-  month = months_string[int(trip.month)]
-  model.SavedTrip.create(month = month, park = trip.park, image_1 = trip.image_1, image_2 = trip.image_2,
-                         image_3 = trip.image_3, image_4 = trip.image_4, precipitation = trip.precipitation,
-                         avg_temp = trip.avg_temp, max_temp = trip.max_temp, min_temp = trip.min_temp)
+  database.save_trip(trip)
   trips = model.SavedTrip.select().execute()
-  for t in trips:
-    pprint(t)
   json_trips = json.dumps([t.dump() for t in trips]) 
   return json_trips
 
