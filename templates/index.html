@@ -2,30 +2,87 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>National Parks Finder</title>
+<title class="Parks_header">National Parks Finder</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
 <style>
-#map {width: 500px; height: 500px; }
+#map {width: 500px;
+	 height: 500px;
+	 margin-top: 50px;
+	 margin-left: auto;
+     margin-right: auto;
+
+	 }
+body {
+ 	background-color: linen  ;
+  	text-align: center;
+	border: 3px solid green;
+}
+#first_q {
+	margin-top: 50px;
+	font-style: italic;
+	font-size: x-large;
+}
+#q{
+	font-size: 10rem;
+	text-align: center;
+    height:20vh;
+      line-height: 20vh;
+	    color: #fcedd8;
+	    background: #d4989e;
+	   	font-family: 'Niconne', cursive;
+	    font-weight: 700;
+      text-shadow: 5px 5px 0px #eb452b, 
+                  10px 10px 0px #efa032, 
+                  15px 15px 0px #46b59b, 
+                  20px 20px 0px #017e7f, 
+                  25px 25px 0px #052939, 
+                  30px 30px 0px #c11a2b, 
+                  35px 35px 0px #c11a2b, 
+                  40px 40px 0px #c11a2b, 
+                  45px 45px 0px #c11a2b;
+}
+.button {
+  background-color: #e97e7e; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
 </style>
 </head>
 <body>
     <form class="form" action="/" method="GET">
-		<label for="states">What State would you like to search?</label>
+		<label id= "q"> National Parks Finder </label> <br></br>
+		<label id ="first_q" for="states">What State would you like to search?</label>
 		<select name="states" id="states" class="form-control">
 			{% for s in state %}
 			<option value="{{ s }}">{{ s }}</option>
 			{% endfor %}
 		</select>
+		<br></br>
 		
-		<label for="months">When are you going?</label>
+		<label id="first_q" for="months">When are you going?</label>
 		<select name="months" id="months" class="form-control">
 			{% for m in month %}
 			<option value="{{ m }}" id='month'>{{ m }}</option>
 			{% endfor %}
 		</select>
-		<button type="submit" id="search-button">SEARCH</button>
+		<br></br>
+		<button type="submit" id="search-button" class="button button2">SEARCH</button>
 	</form>
 	<div id="map">
 	</div>
