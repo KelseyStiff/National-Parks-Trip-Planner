@@ -1,6 +1,7 @@
 from peewee import Model, CharField, Database, Check, SqliteDatabase, DecimalField, ForeignKeyField, AutoField
 from .config import db_path
 import os
+from apis.conversion_dicts import months_string
 
 db = SqliteDatabase(db_path)
 
@@ -72,6 +73,14 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
                           "max_temp" : float(self.max_temp),
                           "min_temp" : float(self.min_temp)
                           }}
+
+
+    def __eq__(self, other):
+        return (self.park == other.park) & (self.month == months_string[int(other.month)])
+
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 
 class SavedTrip(Trip):
