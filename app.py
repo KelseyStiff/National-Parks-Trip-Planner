@@ -13,10 +13,6 @@ app = flask.Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
-
-
-
-
   state = states
   month = months
   parks = []
@@ -45,10 +41,7 @@ def park_info(park_id,month):
   trip_w_climate = climate_api.get_weather_data(park, month)
   trip_w_climate_and_pictures = unsplash_api.get_park_image(trip_w_climate)
 
-
   json_trip = json.dumps(trip_w_climate_and_pictures.dump())
-  print(json_trip)
-
   return json_trip
 
 

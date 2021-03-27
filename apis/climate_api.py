@@ -34,7 +34,7 @@ def _climate_api_call(latitude, longitude):
 def _add_climate_data_to_trip(response, park, month):
     data = response['data']
     climate_for_month = data[month - 1]
-    precipitation = climate_for_month['prcp']
+    precipitation = _convert_mm_to_inches(climate_for_month['prcp'])
     avg_temp = _convert_celsius_to_fahrenheit(climate_for_month['tavg'])
     max_temp = _convert_celsius_to_fahrenheit(climate_for_month['tmax'])
     min_temp = _convert_celsius_to_fahrenheit(climate_for_month['tmin'])
@@ -45,8 +45,19 @@ def _add_climate_data_to_trip(response, park, month):
 
 
 def _convert_celsius_to_fahrenheit(temp):
-    return (temp * 1.8) + 32
+    try:
+        temperature = round((float(temp) * 1.8) + 32, 2)
+    except:
+        temperature = 0
+    return temperature
 
+
+def _convert_mm_to_inches(rainfall):
+    try:
+        precipitation = round(float(rainfall) / 25.4, 1)
+    except:
+        precipitation = 0
+    return precipitation
 
 
 
