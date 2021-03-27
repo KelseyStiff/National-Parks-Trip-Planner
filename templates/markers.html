@@ -13,6 +13,21 @@
 		<img id='img2' src="" alt="park image two" style="visibility:hidden">
 		<img id='img3'src="" alt="park image three" style="visibility:hidden">
 		<img id='img4' src="" alt="park image four" style="visibility:hidden">
+		<button type="submit" id="save-button" style="visibility:hidden">SAVE TRIP</button>
+	</div>
+
+	<div id='saved-trip-info'>
+		<h1 id='trip-name'></h1>
+		<h1 id='trip-city-state'></h1>
+		<h1 id='trip-avg-temp'></h1>
+		<h1 id='trip-min-temp'></h1>
+		<h1 id='trip-max-temp'></h1>
+		<h1 id='trip-avg-rain'></h1>
+
+		<img id='trip-img1' src="" alt="park image one" style="visibility:hidden">
+		<img id='trip-img2' src="" alt="park image two" style="visibility:hidden">
+		<img id='trip-img3'src="" alt="park image three" style="visibility:hidden">
+		<img id='trip-img4' src="" alt="park image four" style="visibility:hidden">
 	</div>
 
 {% endblock content %}
@@ -84,13 +99,64 @@
 						image4URL.style.visibility="visible"
 						image4URL.src = data['park']['image_4'].replaceAll("\"","")
 
+						document.getElementById("save-button").style.visibility = "visible";
+
+
+
+
+
+						document.getElementById("save-button").addEventListener('click', () => {
+							trip_id = data['park']['trip_id']
+							console.log(trip_id)
+							url = `http://127.0.0.1:5000/saved_trip_info/${trip_id}/`
+							fetch(url)
+								.then( (response) => {
+									console.log(response) // logging response from the server
+									// extract JSON
+									return response.json()
+								})
+								.then( function(data) {
+									console.log(data)
+									let parks_string = ""
+									data.forEach(function (park){	
+										parks_string = parks_string + "<br>" + park['park']['park_name'] 
+									})
+									let trip_name = document.getElementById("trip-name")
+										trip_name.innerHTML = JSON.stringify(parks_string).replaceAll("\"","")
+								})
+
+						})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					}) //if issues connecting to API error displays
 					.catch( error => {
 						console.log(error)
 						alert('ERROR, VIEW CONSOLE FOR MORE DETAILS')
 					})
 
-			})// end of event listener
+			
+			
+			
+			
+			
+			
+			
+				})// end of event listener
+
+			
 
         }) //end of for each
 </script>
