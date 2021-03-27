@@ -74,6 +74,13 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
                           }}
 
 
+    def __eq__(self, other):
+        return (self.park == other.park) & (self.month == other.month)
+
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 class SavedTrip(Trip):
     pass
 
