@@ -43,6 +43,10 @@ def get_all_trips():
     return Trip.select()
 
 
+def delete_all_trips():
+    Trip.delete().execute()
+
+
 def _convert_month(month):
     return months_string[int(month)]
 

@@ -10,10 +10,13 @@
 .images img {
 	height: 200px;
 	width: 225px
-  }
+}
+#trip-info{
+	color:rgb(51, 51, 51) ;
+}
 
 .trip-name{
-font-size: 15px;
+font-size: 10px;
 float: left;
 }
 .weather{
@@ -24,28 +27,58 @@ float: center;
 #save-button{
 	float: right;
 }
+ul {
+  list-style-type: none;
+}
+.column {	
+  float: left;
+  width: 20%;
+  margin: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
   </style>
 {% endblock head %}
 {% block content%}
 
 <div id='trip-info'>
-	<h1 id='park-name'></h1>
-	<h1 id='park-city-state'></h1>
-	<h1 id='avg-temp'></h1>
-	<h1 id='min-temp'></h1>
-	<h1 id='max-temp'></h1>
-	<h1 id='avg-rain'></h1>
+	<div class='images'>
+		<img id='img1' src="" alt="park image one" style="visibility:hidden">
+		<img id='img2' src="" alt="park image two" style="visibility:hidden">
+		<img id='img3'src="" alt="park image three" style="visibility:hidden">
+		<img id='img4' src="" alt="park image four" style="visibility:hidden">
+	</div>
+	<div class=row>
+		<div class='trip-name column'>
+			<h1 id='park-name'></h1>
+			<h1 id='park-city-state'></h1>
+		</div>
+		<div class='weather column'>
+			<h1 id=month-display></h1>
+			<h1 id='avg-temp'></h1>
+			<h1 id='min-temp'></h1>
+			<h1 id='max-temp'></h1>
+			<h1 id='avg-rain'></h1>
+		</div>
+		<div class='column'>
+			<button type="submit" id='save-button' class='button button2' style="visibility:hidden">SAVE TRIP</button>
+		</div>
+	</div>
+	<br>
 
-	<img id='img1' src="" alt="park image one" style="visibility:hidden">
-	<img id='img2' src="" alt="park image two" style="visibility:hidden">
-	<img id='img3'src="" alt="park image three" style="visibility:hidden">
-	<img id='img4' src="" alt="park image four" style="visibility:hidden">
-</div>
-
-<button type="submit" id="save-button" style="visibility:hidden">SAVE TRIP</button>
-
-	<ul id='saved-trips'>
-	</ul>
+	</div>
+<br>
+<ul id='saved-trips'>
+</ul>
+<br>
+<table>
+	<!-- here goes our data! -->
+</table>
 
 
 {% endblock content %}
@@ -101,7 +134,8 @@ float: center;
 				})
 			})
 		})    
-	}
+}
+
 	function getData(park_id,month) {
 		// let trip = fetch_data(park_id,month)
 		// console.log(trip)
@@ -132,6 +166,9 @@ float: center;
 	
 				let avg_rain = document.getElementById("avg-rain")
 				avg_rain.innerHTML = `Average Rainfall: ${ data['park']['precipiation']} inches`
+
+				let month_display = document.getElementById("month-display")
+				month_display.innerHTML = `Weather for ${month}`
 	
 				let image1URL = document.getElementById("img1")
 				image1URL.style.visibility="visible"
