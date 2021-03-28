@@ -8,6 +8,7 @@ from database import model
 from database import database
 from pprint import pprint
 
+
 model.create_db()
 app = flask.Flask(__name__)
 
@@ -49,15 +50,15 @@ def park_info(park_id,month):
 
 @app.route('/saved_trip_info/<trip_id>/', methods=['GET','POST'])
 def saved_trip_info(trip_id):
-  trip = model.Trip.get(model.Trip.id == trip_id)
-  model.SavedTrip.create(month = trip.month, park = trip.park, image_1 = trip.image_1, image_2 = trip.image_2,
-                         image_3 = trip.image_3, image_4 = trip.image_4, precipitation = trip.precipitation,
-                         avg_temp = trip.avg_temp, max_temp = trip.max_temp, min_temp = trip.min_temp)
+  if trip_id:
+    trip = model.Trip.get(model.Trip.id == trip_id)
+    model.SavedTrip.create(month = trip.month, park = trip.park, image_1 = trip.image_1, image_2 = trip.image_2,
+                          image_3 = trip.image_3, image_4 = trip.image_4, precipitation = trip.precipitation,
+                          avg_temp = trip.avg_temp, max_temp = trip.max_temp, min_temp = trip.min_temp)
 
-  trips = model.SavedTrip.select().execute()
-  json_trips = json.dumps([t.dump() for t in trips]) 
-  return json_trips
+    trips = model.SavedTrip.select().execute()
+    json_trips = json.dumps([t.dump() for t in trips]) 
+    return json_trips
 
-  
 if __name__ == '__main__':
     app.run(debug=True)
