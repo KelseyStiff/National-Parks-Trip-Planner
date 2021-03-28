@@ -29,7 +29,6 @@ def _extract_data(response, trip):
     trip.image_3 = images[2]['urls']['small']
     trip.image_4 = images[3]['urls']['small']
     return trip
-    
 
 
 
