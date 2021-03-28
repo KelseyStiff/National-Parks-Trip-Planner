@@ -14,6 +14,7 @@ app = flask.Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
+
   state = states
   month = months
   parks = []
