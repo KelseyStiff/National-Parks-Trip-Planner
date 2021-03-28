@@ -1,7 +1,7 @@
 from peewee import Model, CharField, Database, Check, SqliteDatabase, DecimalField, ForeignKeyField, AutoField
 from .config import db_path
 import os
-from apis.conversion_dicts import months_string
+from apis.conversion_dicts import months_string, months_int
 
 db = SqliteDatabase(db_path)
 
@@ -85,6 +85,10 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
 
 class SavedTrip(Trip):
     pass
+
+    
+
+
 
 
 def create_db():
