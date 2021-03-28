@@ -50,8 +50,9 @@ def park_info(park_id,month):
 
 @app.route('/saved_trip_info/<trip_id>/', methods=['GET','POST'])
 def saved_trip_info(trip_id):
-  trip = model.Trip.get(model.Trip.id == trip_id)
-  database.save_trip(trip)
+  if trip_id:
+    trip = model.Trip.get(model.Trip.id == trip_id)
+    database.save_trip(trip)
   trips = model.SavedTrip.select().execute()
   json_trips = json.dumps([t.dump() for t in trips]) 
   return json_trips
