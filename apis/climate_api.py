@@ -1,10 +1,12 @@
 import requests
 import os
 from pprint import pprint
-from .states_and_months import months
+from .conversion_dicts import months_int
 from database.model import Trip
 
 key = os.environ.get('CLIMATE_KEY')
+
+
 
 
 
@@ -20,7 +22,7 @@ def get_weather_data(park, month):
     
     
 def _get_month_int(month):
-    month_int = months[month]
+    month_int = months_int[month]
     return month_int
 
 

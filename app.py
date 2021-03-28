@@ -1,8 +1,8 @@
 import flask
 from flask import request, url_for, render_template, redirect, jsonify
 import os
-from states_months import states, months, state_coordinates
-from apis import national_parks_api, states_and_months, climate_api, unsplash_api
+from apis.conversion_dicts import states, months, state_coordinates, months_string, states_to_codes
+from apis import national_parks_api, climate_api, unsplash_api
 import json
 from database import model
 from database import database
@@ -14,6 +14,8 @@ app = flask.Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def index():
   key = os.environ.get('MAPBOX_KEY')
+
+
   state = states
   month = months
   parks = []
@@ -29,6 +31,8 @@ def index():
         print(f'Error occured because: {e}')
 
 
+
+      parks = database.get_parks_by_state(states_to_codes[state_input.upper()]) # try to get the parks from the database
       if parks == None: # if there aren't any parks for the state in the database, call the api to fetch it
         try:
           parks = national_parks_api.get_park_data(state_input)
@@ -71,11 +75,9 @@ def park_info(park_id,month):
 
 @app.route('/saved_trip_info/<trip_id>/', methods=['GET','POST'])
 def saved_trip_info(trip_id):
-  trip = model.Trip.get(model.Trip.id == trip_id)
-  model.SavedTrip.create(month = trip.month, park = trip.park, image_1 = trip.image_1, image_2 = trip.image_2,
-                         image_3 = trip.image_3, image_4 = trip.image_4, precipitation = trip.precipitation,
-                         avg_temp = trip.avg_temp, max_temp = trip.max_temp, min_temp = trip.min_temp)
-
+  if trip_id:
+    trip = model.Trip.get(model.Trip.id == trip_id)
+    database.save_trip(trip)
   trips = model.SavedTrip.select().execute()
   json_trips = json.dumps([t.dump() for t in trips]) 
   return json_trips

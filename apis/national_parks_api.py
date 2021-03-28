@@ -1,10 +1,12 @@
 import requests
 from pprint import pprint
 import os
-from .states_and_months import states
+from .conversion_dicts import states_to_codes
 from database.model import Park
 
 key = os.environ.get('NATIONAL_PARKS_KEY')
+
+
 
 
 """All interaction with this module should be done through this function"""
@@ -43,7 +45,7 @@ def _create_trip_object_list(list_of_parks, state_code):
 
 def _get_state_code(state):
     try:
-        state_code = states[state] # Convert full state to 2 letter state code
+        state_code = states_to_codes[state] # Convert full state to 2 letter state code
         return state_code
     except KeyError:
         return "Invalid state."
