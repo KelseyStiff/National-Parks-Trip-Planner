@@ -124,14 +124,18 @@ ul {
 			return response.json()
 			})
 			.then( (data) => {
-				let trip_string = ""
+				document.getElementById("saved-trips").innerHTML = "";
 				data.forEach(function (park){	
-					trip_string = `${park['park']['park_name']} ${park['park']['city']}, ${park['park']['state']}     ${park['park']['month']}` 
+					trip_string = `${park['park']['park_name']} ${park['park']['city']}, ${park['park']['state']} ${park['park']['month']} Average Temp: ${park['park']['avg_temp']}
+								   Max Temp: ${park['park']['max_temp']} Min Temp: ${park['park']['min_temp']}`
+					saved_trip = document.createTextNode(trip_string) 
 					let saved_trips_list = document.createElement("LI");
-					var saved_trip = document.createTextNode(trip_string);   
-					saved_trips_list.appendChild(saved_trip);                        
-					document.getElementById("saved-trips").appendChild(saved_trip);    
+					saved_trips_list.appendChild(saved_trip);  
+					document.getElementById("saved-trips").appendChild(saved_trips_list)  
+					document.getElementById("saved-trips").appendChild(saved_trips_list)                      
 				})
+				
+				
 			})
 		})    
 }

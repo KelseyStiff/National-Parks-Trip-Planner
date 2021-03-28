@@ -76,7 +76,7 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
 
 
     def __eq__(self, other):
-        return (self.park == other.park) & (self.month == months_string[int(other.month)])
+        return (self.park == other.park) & (months_int[self.month] == other.month)
 
 
     def __ne__(self, other):
