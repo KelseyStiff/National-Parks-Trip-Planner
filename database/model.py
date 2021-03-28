@@ -86,6 +86,10 @@ class Trip(BaseModel): # The user shouldn't be able to add the same Trips twice
 class SavedTrip(Trip):
     pass
 
+    
+
+
+
 
 def create_db():
     db.connect()
