@@ -7,6 +7,7 @@ key = os.environ.get('UNSPLASH_KEY')
 
 
 
+
 url = 'https://api.unsplash.com/search/photos'
 number_of_images = 4
 

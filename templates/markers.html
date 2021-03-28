@@ -93,9 +93,12 @@ ul {
 		parks = parks.replaceAll("&#34;", "\"");
 		parks = parks.substr(1).slice(0, -1);
 		parks = JSON.parse(parks);
+
+		console.log(parks)
 		
 		let month = "{{ month_input }}"
 		
+		//loop through all parks passed over
 		parks.forEach(function (park){
 			let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
 			let marker = new mapboxgl.Marker()
@@ -105,11 +108,12 @@ ul {
 				map.flyTo({
 				center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
 				});
-				let data = []
 				marker.getElement().addEventListener('click', () => {
-					//call fetch_data to get Park data, pictures, weather
+					//call fetch_data to get Park data, pictures, weather 
+					//takes in the park_ids and month input
 					park_id = park.park.id
 					getData(park_id,month)
+					console.log(park)
 					})// end of event listener
 			}) //end of for each
 	}

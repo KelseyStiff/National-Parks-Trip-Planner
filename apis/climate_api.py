@@ -11,6 +11,7 @@ key = os.environ.get('CLIMATE_KEY')
 
 
 
+
 url = 'https://api.meteostat.net/v2/point/climate'
 
 """This is the only function in this module that should be called from other modules"""
