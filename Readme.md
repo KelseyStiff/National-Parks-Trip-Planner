@@ -3,6 +3,19 @@ In this project, we tried to provide as much info as possible for all the nation
 This app's main structure is python, and we used HTML, CSS for ease of use, and a better user interface.
 
 Requirements: 
+certifi==2020.12.5
+chardet==4.0.0
+click==7.1.2
+Flask==1.1.2
+idna==2.10
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+peewee==3.14.1
+requests==2.25.1
+urllib3==1.26.3
+Werkzeug==1.0.1
+
 In order to run the program, you first need to install flask
 $ pip install Flask
 and then run flask
