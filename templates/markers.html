@@ -1,34 +1,57 @@
 {% extends 'index.html' %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+.images{
+	margin-top: 5px;
+	 margin-left: auto;
+     margin-right: auto;
+}
+.images img {
+	height: 200px;
+	width: 225px
+  }
+
+.trip-name{
+font-size: 15px;
+float: left;
+}
+.weather{
+font-size: 10px;
+float: center;
+}
+
+#save-button{
+	float: right;
+}
+  </style>
+{% endblock head %}
 {% block content%}
 
 	<div id='trip-info'>
-		<h1 id='park-name'></h1>
-		<h1 id='park-city-state'></h1>
-		<h1 id='avg-temp'></h1>
-		<h1 id='min-temp'></h1>
-		<h1 id='max-temp'></h1>
-		<h1 id='avg-rain'></h1>
 
-		<img id='img1' src="" alt="park image one" style="visibility:hidden">
-		<img id='img2' src="" alt="park image two" style="visibility:hidden">
-		<img id='img3'src="" alt="park image three" style="visibility:hidden">
-		<img id='img4' src="" alt="park image four" style="visibility:hidden">
-		<button type="submit" id="save-button" style="visibility:hidden">SAVE TRIP</button>
+		<div class='images'>
+			<img id='img1' src="" alt="park image one" style="visibility:hidden">
+			<img id='img2' src="" alt="park image two" style="visibility:hidden">
+			<img id='img3'src="" alt="park image three" style="visibility:hidden">
+			<img id='img4' src="" alt="park image four" style="visibility:hidden">
+		</div>
+		<div class='trip-name'>
+			<h1 id='park-name'></h1>
+			<h1 id='park-city-state'></h1>
+		</div>
+		<div class='weather'>
+			<h1 id='avg-temp'></h1>
+			<h1 id='min-temp'></h1>
+			<h1 id='max-temp'></h1>
+			<h1 id='avg-rain'></h1>
+		</div>
+		<br>
+		<button type="submit" id="save-button" class="button button2" style="visibility:hidden">SAVE TRIP</button>
 	</div>
 
-	<div id='saved-trip-info'>
-		<h1 id='trip-name'></h1>
-		<h1 id='trip-city-state'></h1>
-		<h1 id='trip-avg-temp'></h1>
-		<h1 id='trip-min-temp'></h1>
-		<h1 id='trip-max-temp'></h1>
-		<h1 id='trip-avg-rain'></h1>
+	<h1 id='trip-name'></h1>
 
-		<img id='trip-img1' src="" alt="park image one" style="visibility:hidden">
-		<img id='trip-img2' src="" alt="park image two" style="visibility:hidden">
-		<img id='trip-img3'src="" alt="park image three" style="visibility:hidden">
-		<img id='trip-img4' src="" alt="park image four" style="visibility:hidden">
-	</div>
 
 {% endblock content %}
 {% block scripts %}
@@ -101,10 +124,6 @@
 
 						document.getElementById("save-button").style.visibility = "visible";
 
-
-
-
-
 						document.getElementById("save-button").addEventListener('click', () => {
 							trip_id = data['park']['trip_id']
 							console.log(trip_id)
@@ -127,36 +146,13 @@
 
 						})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					}) //if issues connecting to API error displays
 					.catch( error => {
 						console.log(error)
 						alert('ERROR, VIEW CONSOLE FOR MORE DETAILS')
 					})
-
-			
-			
-			
-			
-			
-			
 			
 				})// end of event listener
-
-			
 
         }) //end of for each
 </script>

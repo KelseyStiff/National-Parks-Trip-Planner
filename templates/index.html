@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+	{% block head%}
+	{% endblock head %}
 <head>
 <meta charset="utf-8">
 <title class="Parks_header">National Parks Finder</title>
@@ -7,44 +9,80 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
 <style>
-#map {width: 500px;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+#map {
+	width: 500px;
 	 height: 500px;
-	 margin-top: 50px;
+	 margin-top: 5px;
 	 margin-left: auto;
      margin-right: auto;
+	 float: left;
 
 	 }
 body {
- 	background-color: linen  ;
+ 	background-color: rgb(208, 215, 223)  ;
   	text-align: center;
-	border: 3px solid green;
+	font-family: 'Lato', sans-serif;
 }
-#first_q {
-	margin-top: 50px;
-	font-style: italic;
-	font-size: x-large;
+.user-input {
+	background-color: white;
+	width: 600px;
+	position: sticky;
+	left: 30%;
+	overflow: auto;
+	margin-top: 100px;
+	display: flex;
+  	flex-direction: row;
+  	flex-wrap: nowrap;
 }
-#q{
-	font-size: 10rem;
+
+#state-input{
+color: rgb(83, 83, 83);
+padding: 5px 70px 5px 30px;
+}
+
+#month-input{
+color:  rgb(83, 83, 83);
+padding: 5px 50px 20px 5px;
+}
+
+
+.title{
+	width: 100%;
+	height: 600px;
 	text-align: center;
-    height:20vh;
-      line-height: 20vh;
-	    color: #fcedd8;
-	    background: #d4989e;
-	   	font-family: 'Niconne', cursive;
-	    font-weight: 700;
-      text-shadow: 5px 5px 0px #eb452b, 
-                  10px 10px 0px #efa032, 
-                  15px 15px 0px #46b59b, 
-                  20px 20px 0px #017e7f, 
-                  25px 25px 0px #052939, 
-                  30px 30px 0px #c11a2b, 
-                  35px 35px 0px #c11a2b, 
-                  40px 40px 0px #c11a2b, 
-                  45px 45px 0px #c11a2b;
+	color: rgb(255, 255, 255);
+	text-shadow: grey 2px;
+	font-size: 15px;
+	-webkit-background-size: cover;
+ 	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+	position: relative;
 }
+
+.title h2{
+	text-shadow: 2px 2px #727272;
+	margin-top: 50px;
+	margin-bottom: 40px;
+	font-size: 30px;
+	text-align: center;
+
+}
+
+.title h1{
+	margin: 0;
+	font-size: 250px;
+	text-align: center;
+	font-family: 'Bebas Neue', cursive;
+}
+
+
+
 .button {
-  background-color: #e97e7e; /* Green */
+  background-color: rgb(146, 185, 146);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -52,37 +90,56 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
 }
+
 .button2:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+#button {
+	margin-left: auto;
+	height: 100%; 
+}
+
+select {
+   border:0px;
+   outline:0px;
+   font-family: 'Lato', sans-serif;
+}
 
 </style>
 </head>
 <body>
     <form class="form" action="/" method="GET">
-		<label id= "q"> National Parks Finder </label> <br></br>
-		<label id ="first_q" for="states">What State would you like to search?</label>
-		<select name="states" id="states" class="form-control">
-			{% for s in state %}
-			<option value="{{ s }}">{{ s }}</option>
-			{% endfor %}
-		</select>
-		<br></br>
-		
-		<label id="first_q" for="months">When are you going?</label>
-		<select name="months" id="months" class="form-control">
-			{% for m in month %}
-			<option value="{{ m }}" id='month'>{{ m }}</option>
-			{% endfor %}
-		</select>
-		<br></br>
-		<button type="submit" id="search-button" class="button button2">SEARCH</button>
+		<div class="title" style='background-image: url( static/title-image.jpg )'>
+			<h1>E X P L O R E</h1> 
+			<h2> Plan Your Next National Park Getaway.</h2>
+			<br>
+			<div class="user-input">
+				<div id="state-input">
+					<label id="user-input1" for="states">Where</label>
+				<select name="states" id="states" class="form-control">
+					{% for s in state %}
+					<option value="{{ s }}">{{ s }}</option>
+					{% endfor %}
+				</select>
+				</div>
+				<div id="month-input">
+					<label id="user-input2" for="months">When</label>
+					<select name="months" id="months" class="form-control">
+						{% for m in month %}
+						<option value="{{ m }}" id='month'>{{ m }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div id='button'>
+					<button type="submit" id="search-button" class="button button2">SEARCH</button>
+				</div>
+			</div>
+		</div>
 	</form>
 	<div id="map">
 	</div>
