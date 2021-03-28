@@ -15,13 +15,14 @@ def save_parks_list(parks):
 
 
 def get_parks_by_state(state):
-    Park.select().where(Park.park_state == state)
+    parks = Park.select().where(Park.park_state == state).execute()
+    return parks
     
 
 def save_trip(trip):  
     saved_trips = SavedTrip.select().execute()
     unique = True
-    month = months_string[int(trip.month)]
+    month = _convert_month(trip.month)
     for s in saved_trips:
         if s == trip:
             unique = False
@@ -33,7 +34,7 @@ def save_trip(trip):
 
 
 def get_park_by_code(code):
-    park = Park.get(Park.park_id == code)
+    park = Park.get_or_none(Park.park_id == code)
     return park
 
 
@@ -42,7 +43,8 @@ def get_all_trips():
     return Trip.select()
 
 
-def delete_all_trips():
-    Trip.delete().execute()
+def _convert_month(month):
+    return months_string[int(month)]
+
 
 
