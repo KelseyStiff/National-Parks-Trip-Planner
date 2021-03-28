@@ -25,10 +25,20 @@ def index():
     month_input = request.args.get("months")
 
     if state_input and month_input:
+      try:
+        parks = database.get_parks_by_state(states_and_months.states[state_input.upper()]) # try to get the parks from the database
+      except Exception as e:
+        print(f'Error occured because: {e}')
+
+
+
       parks = database.get_parks_by_state(states_to_codes[state_input.upper()]) # try to get the parks from the database
       if parks == None: # if there aren't any parks for the state in the database, call the api to fetch it
-        parks = national_parks_api.get_park_data(state_input)
-        database.save_parks_list(parks) # Calling a function to save all parks in the list
+        try:
+          parks = national_parks_api.get_park_data(state_input)
+          database.save_parks_list(parks) # Calling a function to save all parks in the list
+        except Exception as e:
+          print(f'Error occured because: {e}')
       json_parks = json.dumps([p.dump() for p in parks]) # translate Trip object data into json
       coordinates = state_coordinates[state_input]  # coordinates for the state entered by the user
       return render_template('markers.html', key=key, month=month, state=state, parks=json.dumps(json_parks), coordinates=coordinates, month_input=month_input)
@@ -40,10 +50,24 @@ def index():
 def park_info(park_id,month):
   # TO-DO fetch park info from db, make api calls for climate & unsplash data
   # return json response - return jsonify(data)
-  park = database.get_park_by_code(park_id) # TODO get actual data
-  trip_w_climate = climate_api.get_weather_data(park, month)
-  trip_w_climate_and_pictures = unsplash_api.get_park_image(trip_w_climate)
-  database.delete_all_trips()
+  try:
+    park = database.get_park_by_code(park_id) # TODO get actual data
+  except Exception as e:
+    print(f'Error occured when calling the database because: {e}')
+  
+  try:
+    trip_w_climate = climate_api.get_weather_data(park, month)
+  except Exception as e:
+    print(f'Error occured when calling Climate api because: {e}')  
+  try:  
+    trip_w_climate_and_pictures = unsplash_api.get_park_image(trip_w_climate)
+  except Exception as e:
+    print(f'Error occured when calling Unsplash api because: {e}') 
+  try:  
+    database.delete_all_trips()
+  except Exception as e:
+    print(f'Error occured when calling the database because: {e}')
+
   trip_w_climate_and_pictures.save()
   json_trip = json.dumps(trip_w_climate_and_pictures.dump())
   return json_trip
