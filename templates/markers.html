@@ -10,10 +10,13 @@
 .images img {
 	height: 200px;
 	width: 225px
-  }
+}
+#trip-info{
+	color:rgb(51, 51, 51) ;
+}
 
 .trip-name{
-font-size: 15px;
+font-size: 10px;
 float: left;
 }
 .weather{
@@ -24,28 +27,58 @@ float: center;
 #save-button{
 	float: right;
 }
+ul {
+  list-style-type: none;
+}
+.column {	
+  float: left;
+  width: 20%;
+  margin: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
   </style>
 {% endblock head %}
 {% block content%}
 
 <div id='trip-info'>
-	<h1 id='park-name'></h1>
-	<h1 id='park-city-state'></h1>
-	<h1 id='avg-temp'></h1>
-	<h1 id='min-temp'></h1>
-	<h1 id='max-temp'></h1>
-	<h1 id='avg-rain'></h1>
+	<div class='images'>
+		<img id='img1' src="" alt="park image one" style="visibility:hidden">
+		<img id='img2' src="" alt="park image two" style="visibility:hidden">
+		<img id='img3'src="" alt="park image three" style="visibility:hidden">
+		<img id='img4' src="" alt="park image four" style="visibility:hidden">
+	</div>
+	<div class=row>
+		<div class='trip-name column'>
+			<h1 id='park-name'></h1>
+			<h1 id='park-city-state'></h1>
+		</div>
+		<div class='weather column'>
+			<h1 id=month-display></h1>
+			<h1 id='avg-temp'></h1>
+			<h1 id='min-temp'></h1>
+			<h1 id='max-temp'></h1>
+			<h1 id='avg-rain'></h1>
+		</div>
+		<div class='column'>
+			<button type="submit" id='save-button' class='button button2' style="visibility:hidden">SAVE TRIP</button>
+		</div>
+	</div>
+	<br>
 
-	<img id='img1' src="" alt="park image one" style="visibility:hidden">
-	<img id='img2' src="" alt="park image two" style="visibility:hidden">
-	<img id='img3'src="" alt="park image three" style="visibility:hidden">
-	<img id='img4' src="" alt="park image four" style="visibility:hidden">
-</div>
-
-<button type="submit" id="save-button" style="visibility:hidden">SAVE TRIP</button>
-
-	<ul id='saved-trips'>
-	</ul>
+	</div>
+<br>
+<ul id='saved-trips'>
+</ul>
+<br>
+<table>
+	<!-- here goes our data! -->
+</table>
 
 
 {% endblock content %}
@@ -54,54 +87,56 @@ float: center;
 
 	markers()
 	
-	function markers(){
-		let parks = "{{ parks }}";
-		parks = parks.replaceAll("&#39;", "\'");
-		parks = parks.replaceAll("&#34;", "\"");
-		parks = parks.substr(1).slice(0, -1);
-		parks = JSON.parse(parks);
-		
-		let month = "{{ month_input }}"
-		
-		parks.forEach(function (park){
-			let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
-			let marker = new mapboxgl.Marker()
-				.setLngLat([parseFloat(park.park.longitude),parseFloat(park.park.latitude)])
-				.setPopup(new mapboxgl.Popup().setHTML(popupText))
-				.addTo(map)
-				map.flyTo({
-				center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
-				});
-				let data = []
-				marker.getElement().addEventListener('click', () => {
-					//call fetch_data to get Park data, pictures, weather
-					park_id = park.park.id
-					getData(park_id,month)
-					})// end of event listener
-			}) //end of for each
-	}
-	function saveData(park_data) {
-		trip_id = park_data['park']['trip_id']
-		  return new Promise((resolve, reject) => {
-			url = `http://127.0.0.1:5000/saved_trip_info/${trip_id}/`
-			fetch(url)
-			.then( (response) => {
-			console.log(response) // logging response from the server
-			// extract JSON
-			return response.json()
+function markers(){
+	let parks = "{{ parks }}";
+	parks = parks.replaceAll("&#39;", "\'");
+	parks = parks.replaceAll("&#34;", "\"");
+	parks = parks.substr(1).slice(0, -1);
+	parks = JSON.parse(parks);
+	
+	let month = "{{ month_input }}"
+	
+	parks.forEach(function (park){
+		let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
+		let marker = new mapboxgl.Marker()
+			.setLngLat([parseFloat(park.park.longitude),parseFloat(park.park.latitude)])
+			.setPopup(new mapboxgl.Popup().setHTML(popupText))
+			.addTo(map)
+			map.flyTo({
+			center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
+			});
+			let data = []
+			marker.getElement().addEventListener('click', () => {
+				//call fetch_data to get Park data, pictures, weather
+				park_id = park.park.id
+				getData(park_id,month)
+				})// end of event listener
+		}) //end of for each
+}
+function saveData(park_data) {
+	trip_id = park_data['park']['trip_id']
+		return new Promise((resolve, reject) => {
+		url = `http://127.0.0.1:5000/saved_trip_info/${trip_id}/`
+		fetch(url)
+		.then( (response) => {
+		console.log(response) // logging response from the server
+		// extract JSON
+		return response.json()
+		})
+		.then( (data) => {
+			let trip_string = ""
+			data.forEach(function (park){	
+				trip_string = `${park['park']['park_name']} ${park['park']['city']}, ${park['park']['state']}     ${park['park']['month']}`
+				let saved_trips_list = document.createElement("LI");
+				var saved_trip = document.createTextNode(trip_string);   
+				saved_trips_list.appendChild(saved_trip);                        
+				document.getElementById("saved-trips").appendChild(saved_trip); 
+			
 			})
-			.then( (data) => {
-				let trip_string = ""
-				data.forEach(function (park){	
-					trip_string = `${park['park']['park_name']} ${park['park']['city']}, ${park['park']['state']}     ${park['park']['month']}`
-					let saved_trips_list = document.createElement("LI");
-					var saved_trip = document.createTextNode(trip_string);   
-					saved_trips_list.appendChild(saved_trip);                        
-					document.getElementById("saved-trips").appendChild(saved_trip);    
-				})
-			})
-		})    
-	}
+		})
+	})    
+}
+
 	function getData(park_id,month) {
 		// let trip = fetch_data(park_id,month)
 		// console.log(trip)
@@ -132,6 +167,9 @@ float: center;
 	
 				let avg_rain = document.getElementById("avg-rain")
 				avg_rain.innerHTML = `Average Rainfall: ${ data['park']['precipiation']} inches`
+
+				let month_display = document.getElementById("month-display")
+				month_display.innerHTML = `Weather for ${month}`
 	
 				let image1URL = document.getElementById("img1")
 				image1URL.style.visibility="visible"
