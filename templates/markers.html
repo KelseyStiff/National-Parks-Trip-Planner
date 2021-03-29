@@ -86,6 +86,7 @@ ul {
 <script>
 
 	markers()
+	parks_data = []
 	
 	function markers(){
 		let parks = "{{ parks }}";
@@ -93,28 +94,13 @@ ul {
 		parks = parks.replaceAll("&#34;", "\"");
 		parks = parks.substr(1).slice(0, -1);
 		parks = JSON.parse(parks);
+
+		console.log(parks)
 		
 		let month = "{{ month_input }}"
-		
-		parks.forEach(function (park){
-			let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
-			let marker = new mapboxgl.Marker()
-				.setLngLat([parseFloat(park.park.longitude),parseFloat(park.park.latitude)])
-				.setPopup(new mapboxgl.Popup().setHTML(popupText))
-				.addTo(map)
-				map.flyTo({
-				center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
-				});
-				let data = []
-				marker.getElement().addEventListener('click', () => {
-					//call fetch_data to get Park data, pictures, weather
-					park_id = park.park.id
-					getData(park_id,month)
-					})// end of event listener
-			}) //end of for each
-	}
-	function saveData(park_data) {
-		trip_id = park_data['park']['trip_id']
+
+		document.getElementById("save-button").addEventListener('click', () => {				
+		trip_id = parks_data['park']['trip_id']
 		  return new Promise((resolve, reject) => {
 			url = `http://127.0.0.1:5000/saved_trip_info/${trip_id}/`
 			fetch(url)
@@ -131,14 +117,34 @@ ul {
 					saved_trip = document.createTextNode(trip_string) 
 					let saved_trips_list = document.createElement("LI");
 					saved_trips_list.appendChild(saved_trip);  
-					document.getElementById("saved-trips").appendChild(saved_trips_list)  
-					document.getElementById("saved-trips").appendChild(saved_trips_list)                      
+					document.getElementById("saved-trips").appendChild(saved_trips_list)                        
 				})
 				
 				
 			})
-		})    
-}
+		})  
+	}) //end of save button listener   
+		
+		//loop through all parks passed over
+		parks.forEach(function (park){
+			let popupText = `${park.park.name} <br> ${park.park.city}, ${park.park.state} <br> ${park.park.description}`
+			let marker = new mapboxgl.Marker()
+				.setLngLat([parseFloat(park.park.longitude),parseFloat(park.park.latitude)])
+				.setPopup(new mapboxgl.Popup().setHTML(popupText))
+				.addTo(map)
+				map.flyTo({
+				center: [parseFloat(park.park.longitude),parseFloat(park.park.latitude)]
+				});
+				marker.getElement().addEventListener('click', () => {
+					//call fetch_data to get Park data, pictures, weather 
+					//takes in the park_ids and month input
+					park_id = park.park.id
+					getData(park_id,month)
+					console.log(park)
+					})// end of event listener
+			}) //end of for each
+	}
+
 
 	function getData(park_id,month) {
 		// let trip = fetch_data(park_id,month)
@@ -192,9 +198,7 @@ ul {
 	
 				document.getElementById("save-button").style.visibility = "visible";
 	
-				document.getElementById("save-button").addEventListener('click', () => {
-					saveData(data)
-				}) //end of save button listener 
+				parks_data = data
 	
 			}) //if issues connecting to API error displays
 			.catch( error => {
