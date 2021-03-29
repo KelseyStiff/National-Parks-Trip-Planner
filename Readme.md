@@ -29,7 +29,18 @@ You can get more details of each park by clicking on the markers shown on the ma
 Page Title image by <a href="https://unsplash.com/@simonmigaj?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Simon Migaj</a> on <a href="https://unsplash.com/s/photos/travel-app?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 
-KNOWN BUGS/UNFINISHED FEATURES:
+KNOWN BUGS:
+
+* when clicking on the 'Lincoln Boyhood' Park causes errors (unknown cause)
+* some random parks cause an error as well (unknown cause)
+
+
+UNFINISHED FEATURES:
+
+displaying saved trips needs better formatting (like in a table)
+no delete saved trip option - database function exists but no feature to do so in the template
+error handling - there is a pull request for error handling that we did not merge bc fear of too many conflicts with master
+
 
 
 Authors: 
