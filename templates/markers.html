@@ -141,8 +141,6 @@ ul {
 }
 
 	function getData(park_id,month) {
-		// let trip = fetch_data(park_id,month)
-		// console.log(trip)
 		url = `http://127.0.0.1:5000/park_info/${park_id}/${month}` //api/db url here
 		  return new Promise((resolve, reject) => {
 			fetch(url)

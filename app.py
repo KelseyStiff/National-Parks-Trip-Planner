@@ -38,9 +38,7 @@ def index():
 
 @app.route('/park_info/<park_id>/<month>/', methods=['GET','POST'])
 def park_info(park_id,month):
-  # TO-DO fetch park info from db, make api calls for climate & unsplash data
-  # return json response - return jsonify(data)
-  park = database.get_park_by_code(park_id) # TODO get actual data
+  park = database.get_park_by_code(park_id)
   trip_w_climate = climate_api.get_weather_data(park, month)
   trip_w_climate_and_pictures = unsplash_api.get_park_image(trip_w_climate)
   database.delete_all_trips()
