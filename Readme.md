@@ -43,6 +43,9 @@ https://stackoverflow.com/questions/58777484/how-to-access-outside-the-js-fetch-
 adapted and referenced how to use the dumps method:
 https://www.geeksforgeeks.org/json-dump-in-python/
 
+referenced a solution on Stack Overflow for custom dumps() method in our own classes:
+https://stackoverflow.com/questions/27585192/how-to-convert-a-list-of-object-to-json-format-in-python
+
 
 
 
