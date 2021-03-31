@@ -26,7 +26,28 @@ Below the questions, there is an extensive map of the united states.
 When you answer the questions and click on search, the app will display all the national parks on the map with small markers of each park's location. 
 You can get more details of each park by clicking on the markers shown on the map. And save the trip information/view saved trips by selecting the save button
 
+
+CREDS:
 Page Title image by <a href="https://unsplash.com/@simonmigaj?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Simon Migaj</a> on <a href="https://unsplash.com/s/photos/travel-app?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+most of our flask set up was adapted from flasks documentation:
+https://flask.palletsprojects.com/en/1.1.x/
+https://flask.palletsprojects.com/en/1.1.x/quickstart/
+
+referenced this link for passing objects to template:
+https://stackoverflow.com/questions/47169097/passing-objects-through-flask-urls
+
+adapted this code from stackoverflow for fetching data within a Javascript function:
+https://stackoverflow.com/questions/58777484/how-to-access-outside-the-js-fetch-api-the-returned-value
+
+adapted and referenced how to use the dumps method:
+https://www.geeksforgeeks.org/json-dump-in-python/
+
+
+
+
+
+
   
 
 KNOWN BUGS:
