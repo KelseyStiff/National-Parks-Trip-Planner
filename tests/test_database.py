@@ -3,9 +3,13 @@ from unittest import TestCase
 from unittest.mock import patch
 from peewee import Model, CharField, ForeignKeyField, DecimalField, BooleanField, Database, Check, IntegrityError, SqliteDatabase
 
-from database.config import db_path
 test_db_path = 'test_trips.db'
 db_path = test_db_path
+
+# import the module and then modify the string inside that module
+# then when the db code imports it too, it will see the change 
+import database.config as config
+config.db_path = test_db_path
 
 from database.model import Park, SavedTrip, Trip
 from database import database
